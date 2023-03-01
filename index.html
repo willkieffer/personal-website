@@ -1,1 +1,20 @@
-"Hello World"
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+    <h1>Graphing Model Creator</h1>
+    <p>Type your function (in python code) here:</p>
+    <input type="text" id="functionInput"></input>
+    <input type="button" id="submit">Download Model</button>
+    <script>
+    document.getElementById("submit").addEventListener("click", getModel)
+
+    function getModel() {
+        file = new File([document.getElementById("functionInput").value], "functionText.txt");
+    }
+
+    </script>
+</body>
+</html>
