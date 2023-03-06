@@ -1,28 +1,19 @@
 body {
     text-align: center;
-    font-family: sans-serif;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .main {
-    padding-left: 2%;
-    padding-right: 2%;
-    text-align: justify;
-    background-color: rgba(161, 154, 142, 0.499);
-    margin: 2%;
-}
-
-.info {
     padding: 2%;
-    background-color: rgb(174, 174, 174);
+    padding-top: 1%;
+    text-align: justify;
+    background-color: rgba(161, 154, 142, 0.2);
     margin: 2%;
-}
-
-h1 {
-    padding-bottom: 2%;
 }
 
 h2 {
     padding-top: 2%;
+    text-align: center;
 }
 
 .list_items {
@@ -37,5 +28,66 @@ h2 {
 
 a {
     color: black;
+    text-decoration: none;
     font-weight: bold;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav {
+    display: inline-block;
+    width: 19%;
+}
+
+#navbar {
+    width: 100%;
+    margin: 0;
+}
+
+#header {
+    width: 100%;
+    height: auto;
+}
+
+.navlink {
+    height: 30px;
+    padding: 30px;
+    display: block;
+}
+
+#header-name {
+    padding-top: 20px;
+}
+
+#headshot {
+    height: 225px;
+}
+
+.bio {
+    padding: 10px;
+    margin: 2%;
+    width: 98%;
+}
+
+.imageCol {
+    width: 30%;
+}
+
+.sumCol {
+    padding: 4%;
+}
+
+.contactImage {
+    width: 50%;
+    padding-right: 2%;
+    text-align: right;
+}
+
+.contactDetails {
+    text-align: left;
+    padding-left: 2%;
 }
