@@ -1,6 +1,7 @@
 body {
     text-align: center;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    line-height: 30px;
 }
 
 .main {
@@ -90,4 +91,10 @@ ul {
 .contactDetails {
     text-align: left;
     padding-left: 2%;
+}
+
+.info {
+    padding: 2%;
+    padding-left: 8%;
+    padding-right: 8%;
 }

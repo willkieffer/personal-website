@@ -7,7 +7,7 @@ $(document).ready(function () {
             <li class="nav"><a class="navlink" href="about.html">About</a></li>
             <li class="nav"><a class="navlink" href="personal.html">Personal</a></li>
             <li class="nav"><a class="navlink" href="links.html">Links</a></li>
-            <li class="nav"><a class="navlink" href="contact.html">Contact</a></li>
+            <li class="nav"><a class="navlink" href="connect.html">Connect</a></li>
         </ul>
     </div>
     `);
