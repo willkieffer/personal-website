@@ -2,6 +2,7 @@ body {
     text-align: center;
     font-family: 'Roboto', sans-serif;
     line-height: 30px;
+    letter-spacing: 0.2px;
 }
 
 .main {
@@ -52,6 +53,7 @@ ul {
 #header {
     width: 100%;
     height: auto;
+    font-weight: 100;
 }
 
 .navlink {
@@ -97,4 +99,20 @@ ul {
     padding: 2%;
     padding-left: 8%;
     padding-right: 8%;
+}
+
+.links::after {
+    content: attr(href);
+}
+
+#map {
+    height: 600px;
+    width: 96%;
+    margin: 2%;
+}
+
+.restaurantList {
+    width: 25%;
+    padding-left: 2%;
+    text-align: left;
 }
