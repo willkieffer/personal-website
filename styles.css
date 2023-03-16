@@ -131,6 +131,7 @@ ul {
 
 .toggle {
     color: grey;
+    margin: 0;
 }
 
 .projectHeader {
@@ -141,5 +142,11 @@ ul {
 
 .project {
     transition: height 2s;
+    margin-top: 2%;
     margin-bottom: 2%;
+    background-color: rgb(255, 255, 255);
+    padding: 2%;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
 }

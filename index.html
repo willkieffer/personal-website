@@ -7,6 +7,7 @@
     <title>Home - William Kieffer</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link rel="icon" href="earth.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
@@ -34,23 +35,32 @@
             </td>
         </tr>
     </table>
-    <div class="main slow_grow">
+    <div class="main slow_grow projectViewer">
         <h2>Current Projects</h2>
-        <div>
+        <div class="projectDetails">
             <h3 class="projectHeader"><a href="https://github.com/willkieffer/echo3D-Graph-View-Demo">echo3D Graph View
                     Demo</a></h3>
             <h4 class="projectHeader">Hosted on GitHub and PythonAnywhere</h4>
             <p id="toggleProject1" class="toggle">Collapse README.md</p>
-            <zero-md id="project1" class="project"
-                src="https://raw.githubusercontent.com/willkieffer/echo3D-Graph-View-Demo/main/README.md"></zero-md>
         </div>
-        <div>
+        <zero-md id="project1" class="project"
+                src="https://raw.githubusercontent.com/willkieffer/echo3D-Graph-View-Demo/main/README.md"></zero-md>
+        <div class="projectDetails">
             <h3 class="projectHeader"><a href="https://github.com/willkieffer/echo3D-Graph-View-Demo">Personal
                     Website</a></h3>
             <h4 class="projectHeader">Hosted on GitHub Pages</h4>
             <p id="toggleProject2" class="toggle">Collapse README.md</p>
-            <zero-md id="project2" class="project"
+        </div>
+        <zero-md id="project2" class="project"
                 src="https://raw.githubusercontent.com/willkieffer/echo3D-Graph-View-Demo/main/README.md"></zero-md>
+        <div class="projectDetails">
+            <h3 class="projectHeader"><a href="https://github.com/willkieffer/echo3D-Graph-View-Demo">Google
+                    TensorFlow/Spotify API</a></h3>
+            <h4 class="projectHeader">Local - no project files available (yet!)</h4>
+            <p id="toggleProject3" class="toggle">Collapse README.md</p>
+        </div>
+        <div id="project3" class="project">
+            <p>README.md!</p>
         </div>
     </div>
     <div id="footer"></div>

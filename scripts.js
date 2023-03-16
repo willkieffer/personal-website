@@ -17,6 +17,7 @@ $(document).ready(function () {
 
     let originalHeightP1 = 0;
     let originalHeightP2 = 0;
+    let originalHeightP3 = 0;
 
     $("#toggleProject1").bind("mouseover", function () {
         if (originalHeightP1 == 0) {
@@ -27,7 +28,7 @@ $(document).ready(function () {
 
     $("#toggleProject1").bind("click", function () {
         if (this.innerHTML == "Collapse README.md") {
-            $("#project1").css("height", "70px");
+            $("#project1").css("height", "50px");
             this.innerHTML = "Expand README.md";
         } else {
             $("#project1").css("height", originalHeightP1 + "px");
@@ -44,10 +45,27 @@ $(document).ready(function () {
 
     $("#toggleProject2").bind("click", function () {
         if (this.innerHTML == "Collapse README.md") {
-            $("#project2").css("height", "70px");
+            $("#project2").css("height", "50px");
             this.innerHTML = "Expand README.md";
         } else {
             $("#project2").css("height", originalHeightP2 + "px");
+            this.innerHTML = "Collapse README.md";
+        }
+    });
+
+    $("#toggleProject3").bind("mouseover", function () {
+        if (originalHeightP3 == 0) {
+            originalHeightP3 = $("#project3").height();
+            $("#project3").css("height", originalHeightP3 + "px");
+        }
+    });
+
+    $("#toggleProject3").bind("click", function () {
+        if (this.innerHTML == "Collapse README.md") {
+            $("#project3").css("height", "50px");
+            this.innerHTML = "Expand README.md";
+        } else {
+            $("#project3").css("height", originalHeightP3 + "px");
             this.innerHTML = "Collapse README.md";
         }
     });
