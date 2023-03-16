@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
     <script src="scripts.js"></script>
 </head>
 
@@ -17,12 +18,12 @@
     <div id="header"></div>
     <table class="bio">
         <tr>
-            <td class="imageCol">
+            <td class="imageCol slow_grow">
                 <img src="linkedinphoto.png" title="Headshot" id="headshot"></img>
             </td>
-            <td class="sumCol">
-                <h3>Welcome to my personal website!</h3>
-                    <p>Here, you'll find all of my current and past projects. Head over
+            <td class="sumCol slow_grow">
+                <h3 id="testing">Welcome to my personal website!</h3>
+                <p>Here, you'll find all of my current and past projects. Head over
                     to <a href="about.html">About</a> to learn more about who I am. Visit <a
                         href="personal.html">Personal</a> for
                     some fun extras (like Spotify playlists and restaurant reviews!), <a href="links.html">Links</a>
@@ -33,7 +34,7 @@
             </td>
         </tr>
     </table>
-    <div class="main">
+    <div class="main slow_grow">
         <h2>Current Projects</h2>
         <table>
             <tr>
@@ -41,19 +42,13 @@
                     <h3><a href="https://github.com/willkieffer/echo3D-Graph-View-Demo">echo3D-Graph-View-Demo</a></h3>
                 </td>
                 <td class="expDate">
-                    <h4>Spring 2023 (Active)</h4>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h4></h4>
-                    <p class="list_items">Assist in the development, design, and execution of a cross-platform,
-                        real-time
-                        cloud engine with geolocation support for 3D/AR/VR/Metaverse projects. Skills
-                        used include the Unity3D engine (VR and AR frameworks) and C# for scripting.</p>
+                    <h4>Hosted on GitHub and PythonAnywhere</h4>
                 </td>
             </tr>
         </table>
+        <h4></h4>
+        <p class="list_items">Creating an appliction</p>
+        <zero-md src="https://raw.githubusercontent.com/willkieffer/echo3D-Graph-View-Demo/main/README.md"></zero-md>
     </div>
 
     <div id="footer"></div>
