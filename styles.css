@@ -128,3 +128,18 @@ ul {
 .grow:hover {
     transform: scale(1.2);
 }
+
+.toggle {
+    color: grey;
+}
+
+.projectHeader {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 15px;
+}
+
+.project {
+    transition: height 2s;
+    margin-bottom: 2%;
+}
