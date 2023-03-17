@@ -7,3 +7,11 @@ Skills used:
 - CSS
 - JavaScript/jQuery
 - Google Cloud API (Maps)
+
+Todo
+- Finish updating echo3D graph and tensorflow/spotify
+- Upload more current resume
+     - Use [resumeworded.com](https://resumeworded.com/) and [VMock](https://www.vmock.com/default/login)
+- Integrate design colors (shown on favicon)
+- Clean up links page (organize by project?)
+- Add movie/tv recommendations
