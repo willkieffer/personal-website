@@ -18,6 +18,7 @@ $(document).ready(function () {
     let originalHeightP1 = 0;
     let originalHeightP2 = 0;
     let originalHeightP3 = 0;
+    let originalHeightP4 = 0;
 
     $("#toggleProject1").bind("mouseover", function () {
         if (originalHeightP1 == 0) {
@@ -66,6 +67,23 @@ $(document).ready(function () {
             this.innerHTML = "Expand README.md";
         } else {
             $("#project3").css("height", originalHeightP3 + "px");
+            this.innerHTML = "Collapse README.md";
+        }
+    });
+
+    $("#toggleProject4").bind("mouseover", function () {
+        if (originalHeightP4 == 0) {
+            originalHeightP4 = $("#project4").height();
+            $("#project4").css("height", originalHeightP4 + "px");
+        }
+    });
+
+    $("#toggleProject4").bind("click", function () {
+        if (this.innerHTML == "Collapse README.md") {
+            $("#project4").css("height", "50px");
+            this.innerHTML = "Expand README.md";
+        } else {
+            $("#project4").css("height", originalHeightP4 + "px");
             this.innerHTML = "Collapse README.md";
         }
     });
