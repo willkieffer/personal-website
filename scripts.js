@@ -1,14 +1,24 @@
 $(document).ready(function () {
     $("#header").html(`
     <h1 id="header-name">William Kieffer</h1>
-    <div id="navbar">
-        <ul>
-            <li class="nav grow"><a class="navlink" href="index.html">Home</a></li>
-            <li class="nav grow"><a class="navlink" href="resume.html">Resume</a></li>
-            <li class="nav grow"><a class="navlink" href="personal.html">Personal</a></li>
-            <li class="nav grow"><a class="navlink" href="links.html">Links</a></li>
-            <li class="nav grow"><a class="navlink" href="connect.html">Connect</a></li>
-        </ul>
+    <div id="navbarL">
+        <div class="navL grow"><a href="index.html">Home</a></div>
+        <div class="navL grow"><a href="resume.html">Resume</a></div>
+        <div class="navL grow"><a href="personal.html">Personal</a></div>
+        <div class="navL grow"><a href="links.html">Links</a></div>
+        <div class="navL grow"><a href="connect.html">Connect</a></div>
+    </div>
+    <div id="smallNav">
+        <div id="showNav">
+            <p>Show Navigation</p>
+        </div>
+        <div id="navbarS">
+            <div class="navS"><a href="index.html">Home</a></div>
+            <div class="navS"><a href="resume.html">Resume</a></div>
+            <div class="navS"><a href="personal.html">Personal</a></div>
+            <div class="navS"><a href="links.html">Links</a></div>
+            <div class="navS"><a href="connect.html">Connect</a></div>
+        </div>
     </div>
     `);
     $("#footer").html(`
@@ -19,6 +29,18 @@ $(document).ready(function () {
     let originalHeightP2 = 0;
     let originalHeightP3 = 0;
     let originalHeightP4 = 0;
+
+    $("#showNav").bind("click", function() {
+        if($("#navbarS").css("height") == "0px") {
+            $("#navbarS").css("height", "auto");
+            //Fix this
+            $("#showNav").innerHTML = "<p>Hide Navigation</p>";
+            console.log($("#showNav").innerHTML);
+        } else {
+            $("#navbarS").css("height", "0px");
+            $("#showNav").innerHTML = "<p>Show Navigation</p>";
+        }
+    });
 
     $("#toggleProject1").bind("mouseover", function () {
         if (originalHeightP1 == 0) {
