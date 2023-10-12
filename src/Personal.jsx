@@ -244,22 +244,20 @@ const Home = () => {
       <div class="main">
         <h2>Spotify Playlists</h2>
         <iframe
-          style="border-radius:12px; margin: 0.5%;"
+          style={{ borderRadius: "12px", margin: "0.5%" }}
           src="https://open.spotify.com/embed/playlist/37i9dQZF1EIUCQjiEWWFBf?utm_source=generator"
           width="48%"
           height="500px"
           frameBorder="0"
-          allowfullscreen=""
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
         ></iframe>
         <iframe
-          style="border-radius:12px; margin: 0.5%;"
+          style={{ borderRadius: "12px", margin: "0.5%" }}
           src="https://open.spotify.com/embed/playlist/4rZ9QX3JGHVpQx47LvUgfL?utm_source=generator"
           width="48%"
           height="500px"
           frameBorder="0"
-          allowfullscreen=""
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
         ></iframe>

@@ -1,42 +1,33 @@
 import React from "react"
 import linkedinphoto from "./assets/linkedinphoto.png"
+import { Link, Stack, Typography } from "@mui/material"
 
 const Connect = () => {
   return (
-    <div>
-      <table class="bio">
-        <tr>
-          <td class="contactImage">
-            <img src={linkedinphoto} title="Headshot" id="headshot" width={50}></img>
-          </td>
-          <td class="contactDetails">
-            <ul>
-              <li>
-                <p>New York, NY 10038</p>
-              </li>
-              <li>
-                <p>660-247-5095</p>
-              </li>
-              <li>
-                <a href="mailto:william.kieffer@outlook.com">william.kieffer@outlook.com</a>
-              </li>
-              <li>
-                <p>
-                  LinkedIn:{" "}
-                  <a href="https://www.linkedin.com/in/williamkieffer24/">williamkieffer24</a>
-                </p>
-              </li>
-              <li>
-                <p>
-                  GitHub:
-                  <a href="https://github.com/willkieffer">willkieffer</a>
-                </p>
-              </li>
-            </ul>
-          </td>
-        </tr>
-      </table>
-    </div>
+    <>
+      <Stack direction="row" spacing={4} alignItems="center" justifyContent="center" sx={{ p: 2 }}>
+        <img src={linkedinphoto} title="Headshot" id="headshot" width={150} height={150} />
+        <Stack spacing={1}>
+          <Typography>New York, NY 10038</Typography>
+          <Typography>660-247-5095</Typography>
+          <Link underline="none" href="mailto:william.kieffer@outlook.com">
+            william.kieffer@outlook.com
+          </Link>
+          <Typography>
+            LinkedIn:{" "}
+            <Link underline="none" href="https://www.linkedin.com/in/williamkieffer24/">
+              williamkieffer24
+            </Link>
+          </Typography>
+          <Typography>
+            GitHub:{" "}
+            <Link underline="none" href="https://github.com/willkieffer">
+              willkieffer
+            </Link>
+          </Typography>
+        </Stack>
+      </Stack>
+    </>
   )
 }
 

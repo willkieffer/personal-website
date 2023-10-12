@@ -1,11 +1,24 @@
-import React from "react"
+import React, { useState } from "react"
 import resume from "./assets/Resume - William Kieffer.pdf"
+import { Document, Page, pdfjs } from "react-pdf"
+import { Container, Stack } from "@mui/material"
+
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
 
 const Home = () => {
+  const [windowSize, setWindowSize] = useState(window.innerWidth)
+  window.addEventListener("resize", () => setWindowSize(window.innerWidth))
   return (
-    <div>
-      <iframe src={resume} width="80%" height="1000px"></iframe>
-    </div>
+    <Stack alignItems={"center"} justifyContent={"center"}>
+      <Document file={resume}>
+        <Page
+          pageNumber={1}
+          renderAnnotationLayer={false}
+          renderTextLayer={false}
+          width={windowSize}
+        />
+      </Document>
+    </Stack>
   )
 }
 

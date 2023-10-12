@@ -1,75 +1,115 @@
 import React, { useEffect, useState } from "react"
 import linkedinphoto from "./assets/linkedinphoto.png"
-import { Typography } from "@mui/material"
+import { Container, Modal, Paper, Stack, Typography } from "@mui/material"
 import ReactMarkdown from "react-markdown"
+import Masonry from "@mui/lab/Masonry"
 
 const Home = () => {
-  const [state, setState] = useState()
+  const [markdownFile, setMarkdownFile] = useState()
+  const [activeProject, setActiveProject] = useState()
 
   useEffect(() => {
-    fetch("https://raw.githubusercontent.com/willkieffer/echo3D-Graph-View-Demo/main/README.md")
-      .then((response) => response.text())
-      .then((text) => setState(text))
-  })
+    if (!activeProject?.readme) setMarkdownFile()
+    else
+      fetch(activeProject.readme)
+        .then((response) => response.text())
+        .then((text) => setMarkdownFile(text))
+  }, [activeProject])
+
+  const projects = [
+    {
+      name: "Meal Prep Assistant",
+      description: "A project to help with meal prepping. Hosted on AWS.",
+      github: "",
+    },
+    {
+      name: "Smart Budgeting App",
+      description: "A project to help with budgeting. Hosted on Azure.",
+      github: "",
+    },
+    {
+      name: "echo3D Graph View Demo",
+      description: "A demo of the echo3D Graph View. Hosted on GitHub and PythonAnywhere.",
+      github: "https://github.com/willkieffer/echo3D-Graph-View-Demo",
+      readme: "https://raw.githubusercontent.com/willkieffer/echo3D-Graph-View-Demo/main/README.md",
+    },
+    {
+      name: "Personal Website",
+      description: "This website!",
+      github: "",
+      readme: "https://raw.githubusercontent.com/willkieffer/willkieffer.github.io/main/README.md",
+    },
+    {
+      name: "Google TensorFlow/Spotify API/Microsoft Graph",
+      description: `A project to analyze Spotify songs using TensorFlow and Microsoft Graph. README.md! - tensorflow! (sentiment analysis of spotify songs) - piece together second
+          half of conversations (use your phone for real time responses)`,
+      github: "",
+    },
+    {
+      name: "Resy Booking Automation",
+      description:
+        "A project to automate booking reservations on Resy. Hosted on GitHub -> Transitioning to AWS Lambda",
+      github: "https://github.com/willkieffer/resy-booking-app",
+      readme: "https://raw.githubusercontent.com/willkieffer/resy-booking-app/main/README.md",
+    },
+  ]
 
   return (
     <>
-      <img src={linkedinphoto} title="Headshot" id="headshot" width={50}></img>
-      <Typography variant="h5">Welcome to my personal website!</Typography>
+      <Modal open={activeProject ? true : false} onClose={() => setActiveProject()}>
+        <Container
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            maxWidth: "80vw",
+            maxHeight: "80vh",
+            overflowY: "scroll",
+            transform: "translate(-50%, -50%)",
+            border: "2px solid #000",
+            bgcolor: "background.default",
+            boxShadow: 24,
+            borderRadius: "5px",
+          }}
+        >
+          {activeProject && (
+            <Stack
+              sx={{
+                p: 2,
+              }}
+            >
+              <Typography variant="h6" color="primary">
+                {activeProject.name}
+              </Typography>
+              <Typography>{activeProject.description}</Typography>
+              <ReactMarkdown children={markdownFile} />
+            </Stack>
+          )}
+        </Container>
+      </Modal>
+      <Typography variant="h5" textAlign="center">
+        Welcome to my personal website!
+      </Typography>
       <Typography variant="h6">Current Projects</Typography>
-      <div class="projectDetails">
-        <h3 class="projectHeader">
-          <a href="https://github.com/willkieffer/echo3D-Graph-View-Demo">echo3D Graph View Demo</a>
-        </h3>
-        <h4 class="projectHeader">Hosted on GitHub and PythonAnywhere</h4>
-        <p id="toggleProject1" class="toggle">
-          Collapse README.md
-        </p>
-      </div>
-      <ReactMarkdown children={state} />
-      <div class="projectDetails">
-        <h3 class="projectHeader">
-          <a href="https://github.com/willkieffer/willkieffer.github.io">Personal Website</a>
-        </h3>
-        <h4 class="projectHeader">Hosted on GitHub Pages</h4>
-        <p id="toggleProject2" class="toggle">
-          Collapse README.md
-        </p>
-      </div>
-      <zero-md
-        id="project2"
-        class="project"
-        src="https://raw.githubusercontent.com/willkieffer/willkieffer.github.io/main/README.md"
-      ></zero-md>
-      <div class="projectDetails">
-        <h3 class="projectHeader">
-          <a href="">Google TensorFlow/Spotify API/Microsoft Graph</a>
-        </h3>
-        <h4 class="projectHeader">Local - no project files available (yet!)</h4>
-        <p id="toggleProject3" class="toggle">
-          Collapse README.md
-        </p>
-      </div>
-      <div id="project3" class="project">
-        <p>
-          README.md! - tensorflow! (sentiment analysis of spotify songs) - piece together second
-          half of conversations (use your phone for real time responses)
-        </p>
-      </div>
-      <div class="projectDetails">
-        <h3 class="projectHeader">
-          <a href="https://github.com/willkieffer/resy-booking-app">Resy Booking Automation</a>
-        </h3>
-        <h4 class="projectHeader">{`Hosted on GitHub -> Transitioning to AWS Lambda`}</h4>
-        <p id="toggleProject4" class="toggle">
-          Collapse README.md
-        </p>
-      </div>
-      <zero-md
-        id="project4"
-        class="project"
-        src="https://raw.githubusercontent.com/willkieffer/resy-booking-app/main/README.md"
-      ></zero-md>
+      <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={2}>
+        {projects.map((project) => {
+          return (
+            <Paper
+              key={project.name}
+              elevation={3}
+              sx={{ p: 2, bgcolor: "background.paper", cursor: "pointer" }}
+              onClick={() => setActiveProject(project)}
+            >
+              <Stack>
+                <Typography variant="h6" color="primary">
+                  {project.name}
+                </Typography>
+                <Typography>{project.description}</Typography>
+              </Stack>
+            </Paper>
+          )
+        })}
+      </Masonry>
     </>
   )
 }

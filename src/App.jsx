@@ -15,11 +15,6 @@ function App() {
       errorElement: <h1>404</h1>,
       children: [
         {
-          path: "/home",
-          element: <Home />,
-          errorElement: <h1>404</h1>,
-        },
-        {
           path: "/connect",
           element: <Connect />,
           errorElement: <h1>404</h1>,
@@ -39,6 +34,11 @@ function App() {
           element: <Personal />,
           errorElement: <h1>404</h1>,
         },
+        {
+          index: true,
+          element: <Home />,
+          errorElement: <h1>404</h1>,
+        },
       ],
     },
   ])
@@ -51,6 +51,9 @@ const Root = () => {
     palette: {
       primary: blueGrey,
       secondary: cyan,
+      background: {
+        paper: "#fafafa",
+      },
     },
   })
 
@@ -60,7 +63,7 @@ const Root = () => {
         William Kieffer
       </Typography>
       <Stack direction="row" justifyContent="space-around">
-        <Link to={"/home"}>
+        <Link to={"/"}>
           <Button sx={{ p: 3 }}>Home</Button>
         </Link>
         <Link to={"/resume"}>
