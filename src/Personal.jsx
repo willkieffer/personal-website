@@ -251,6 +251,7 @@ const Home = () => {
           frameBorder="0"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
+          title="paraforCuva_Spotify"
         ></iframe>
         <iframe
           style={{ borderRadius: "12px", margin: "0.5%" }}
@@ -260,6 +261,7 @@ const Home = () => {
           frameBorder="0"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
+          title="dailySolution6_Spotify"
         ></iframe>
       </div>
       <div>

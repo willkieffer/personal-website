@@ -6,7 +6,14 @@ const Connect = () => {
   return (
     <>
       <Stack direction="row" spacing={4} alignItems="center" justifyContent="center" sx={{ p: 2 }}>
-        <img src={linkedinphoto} title="Headshot" id="headshot" width={150} height={150} />
+        <img
+          src={linkedinphoto}
+          title="Headshot"
+          id="headshot"
+          alt="headshot"
+          width={150}
+          height={150}
+        />
         <Stack spacing={1}>
           <Typography>New York, NY 10038</Typography>
           <Typography>660-247-5095</Typography>

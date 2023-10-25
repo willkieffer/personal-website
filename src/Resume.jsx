@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import resume from "./assets/Resume - William Kieffer.pdf"
 import { Document, Page, pdfjs } from "react-pdf"
-import { Container, Stack } from "@mui/material"
+import { Stack } from "@mui/material"
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
 

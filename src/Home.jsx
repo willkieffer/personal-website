@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import linkedinphoto from "./assets/linkedinphoto.png"
 import { Container, Modal, Paper, Stack, Typography } from "@mui/material"
 import ReactMarkdown from "react-markdown"
 import Masonry from "@mui/lab/Masonry"
@@ -87,9 +86,6 @@ const Home = () => {
           )}
         </Container>
       </Modal>
-      <Typography variant="h5" textAlign="center">
-        Welcome to my personal website!
-      </Typography>
       <Typography variant="h6">Current Projects</Typography>
       <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={2}>
         {projects.map((project) => {

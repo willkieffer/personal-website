@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div>
       <div class="main">
-        <p>
+        {/* <p>
           For all reference: <a class="links" href="https://web.postman.co/workspace/"></a>
         </p>
         <p>
@@ -206,7 +206,7 @@ const Home = () => {
           <br />
           <a class="links" href="https://insights.spotify.com/us/"></a>
           <br />
-        </p>
+        </p> */}
       </div>
     </div>
   )
