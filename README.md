@@ -1,4 +1,4 @@
-# willkieffer.github.io
+# personal-website
 
 This website is a project to serve as a showcase for my work, contact info, and other projects.
 
