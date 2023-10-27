@@ -7,7 +7,7 @@ import Masonry from "@mui/lab/Masonry"
 const Home = () => {
   const [markdownFile, setMarkdownFile] = useState()
   const [activeProject, setActiveProject] = useState()
-  const [projects, setProjects] = useState()
+  const [projects, setProjects] = useState([])
 
   //Fill in ...
   /* 
@@ -58,7 +58,7 @@ const Home = () => {
       redirect: "follow",
     }
 
-    if (!projects)
+    if (!projects.length)
       fetch("https://api.github.com/user/repos", requestOptions)
         .then((response) => response.json())
         .then((result) => {
@@ -161,7 +161,7 @@ const Home = () => {
       <Typography variant="h6">My Current Projects</Typography>
       <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={2}>
         {projects
-          ?.filter((project) => project.owner.login === "willkieffer")
+          .filter((project) => project.owner.login === "willkieffer")
           .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
           .map((project) => {
             return (
@@ -185,7 +185,7 @@ const Home = () => {
       <Typography variant="h6">Other Projects I've Contributed To</Typography>
       <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={2}>
         {projects
-          ?.filter((project) => project.owner.login !== "willkieffer")
+          .filter((project) => project.owner.login !== "willkieffer")
           .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
           .map((project) => {
             return (
