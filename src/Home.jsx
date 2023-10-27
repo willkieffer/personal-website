@@ -65,7 +65,7 @@ const Home = () => {
           setProjects(result)
         })
         .catch((error) => console.error("error", error))
-  }, [])
+  }, [projects])
 
   useEffect(() => {
     const fetchReadMe = async () => {
