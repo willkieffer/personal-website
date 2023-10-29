@@ -76,7 +76,7 @@ const Home = () => {
         .then((result) => {
           setMealPrepPhoto4(URL.createObjectURL(result))
         })
-  }, [projects])
+  })
 
   useEffect(() => {
     const fetchReadMe = async () => {
