@@ -18,6 +18,58 @@ Todo
 - Clean up links page (organize by project?)
 - Add movie/tv recommendations
 
+
+      <Typography variant="h5">Personal Project Examples and Helpful Links</Typography>
+      <Typography variant="h6">Resy Bot</Typography>
+      <a class="links" href="https://github.com/Alkaar/resy-booking-bot"></a>
+      <a class="links" href="https://playwright.dev/docs/intro"></a>
+      <a
+        class="links"
+        href="https://tedboy.github.io/flask/quickstart/quickstart7.html#the-request-object"
+      ></a>
+      <a class="links" href="https://www.pythonanywhere.com/user/willkieffer/"></a>
+      <Typography variant="h6">Person Website Links</Typography>
+      <a
+        class="links"
+        href="https://console.cloud.google.com/apis/dashboard?project=personal-website-map-379820"
+      ></a>
+      <Typography variant="h6">TensorFlow Links</Typography>
+      <a class="links" href="https://www.tensorflow.org/tutorials/quickstart/beginner"></a>
+      <a
+        class="links"
+        href="https://www.tensorflow.org/tutorials/keras/text_classification_with_hub"
+      ></a>
+      <a
+        class="links"
+        href="https://imerit.net/blog/the-60-best-free-datasets-for-machine-learning-all-pbm/"
+      ></a>
+      <a class="links" href="https://www.datasetlist.com/"></a>
+      <Typography variant="h6">Spotify API Examples</Typography>
+      <a class="links" href="http://sortyourmusic.playlistmachinery.com/"></a>
+      <a class="links" href="http://organizeyourmusic.playlistmachinery.com/"></a>
+      <a class="links" href="https://obscurifymusic.com/#!/"></a>
+      <a class="links" href="https://www.spotibot.com/"></a>
+      <a
+        class="links"
+        href="https://community.spotify.com/t5/Music-Chat/How-do-I-check-the-genre-of-a-song/td-p/1521053"
+      ></a>
+      <a class="links" href="https://beta.developer.spotify.com/console/get-track/"></a>
+      <a class="links" href="http://playlistmachinery.com/index.html"></a>
+      <a class="links" href="https://musicmachinery.com/"></a>
+      <a class="links" href="http://static.echonest.com/enspex/"></a>
+      <a class="links" href="https://www.last.fm/user/alexia_va"></a>
+      <a class="links" href="https://spotifystatistics.com/"></a>
+      <a class="links" href="https://zweicoder.gitlab.io/songbird/"></a>
+      <a class="links" href="https://www.skiley.net/"></a>
+      <a class="links" href="https://mainstream.ghan.nl/"></a>
+      <a class="links" href="http://www.mymusichabits.com/"></a>
+      <a class="links" href="http://explr.fm/"></a>
+      <a class="links" href="https://descent.live/now"></a>
+      <a class="links" href="https://insights.spotify.com/us/"></a>
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

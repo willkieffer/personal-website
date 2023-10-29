@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react"
-import { Document, Page, pdfjs } from "react-pdf"
-import { Stack } from "@mui/material"
-
-pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
+import { Stack, Typography } from "@mui/material"
 
 const Home = () => {
   const [resume, setResume] = useState()
-  const [windowSize, setWindowSize] = useState(window.innerWidth)
-  window.addEventListener("resize", () => setWindowSize(window.innerWidth))
 
   useEffect(() => {
     const fetchResume = async () => {
@@ -22,16 +17,13 @@ const Home = () => {
 
   return (
     <Stack alignItems={"center"} justifyContent={"center"}>
-      {resume && (
-        <Document file={resume}>
-          <Page
-            pageNumber={1}
-            renderAnnotationLayer={false}
-            renderTextLayer={false}
-            width={windowSize}
-          />
-        </Document>
-      )}
+      <Typography variant="p" sx={{ m: 2 }}>
+        PDF not rendering?{" "}
+        <a href={resume} download="William Kieffer Resume">
+          Download a copy
+        </a>
+      </Typography>
+      <iframe src={resume} width="100%" height="800px" title="resume" />
     </Stack>
   )
 }

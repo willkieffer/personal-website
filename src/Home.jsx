@@ -1,52 +1,27 @@
 import React, { useEffect, useState } from "react"
 import linkedinphoto from "./assets/linkedinphoto.png"
-import { Button, Container, Modal, Paper, Stack, Typography } from "@mui/material"
+import logoTransparent from "./assets/logoTransparent.png"
+import { Button, Chip, Container, Grid, Modal, Paper, Stack, Typography } from "@mui/material"
 import ReactMarkdown from "react-markdown"
 import Masonry from "@mui/lab/Masonry"
+import { Lock } from "@phosphor-icons/react"
 
 const Home = () => {
   const [markdownFile, setMarkdownFile] = useState()
   const [activeProject, setActiveProject] = useState()
   const [projects, setProjects] = useState([])
+  const [mealPrepPhoto1, setMealPrepPhoto1] = useState()
+  const [mealPrepPhoto2, setMealPrepPhoto2] = useState()
+  const [mealPrepPhoto3, setMealPrepPhoto3] = useState()
+  const [mealPrepPhoto4, setMealPrepPhoto4] = useState()
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
-  //Fill in ...
-  /* 
-  {
-      name: "Meal Prep Assistant",
-      description: "A project to help with meal prepping. Hosted on AWS.",
-      github: "",
-    },
-    {
-      name: "Smart Budgeting App",
-      description: "A project to help with budgeting. Hosted on Azure.",
-      github: "",
-    },
-    {
-      name: "echo3D Graph View Demo",
-      description: "A demo of the echo3D Graph View. Hosted on GitHub and PythonAnywhere.",
-      github: "https://github.com/willkieffer/echo3D-Graph-View-Demo",
-      readme: "https://raw.githubusercontent.com/willkieffer/echo3D-Graph-View-Demo/main/README.md",
-    },
-    {
-      name: "Personal Website",
-      description: "This website!",
-      github: "",
-      readme: "https://raw.githubusercontent.com/willkieffer/willkieffer.github.io/main/README.md",
-    },
-    {
-      name: "Google TensorFlow/Spotify API/Microsoft Graph",
-      description: `A project to analyze Spotify songs using TensorFlow and Microsoft Graph. README.md! - tensorflow! (sentiment analysis of spotify songs) - piece together second
-          half of conversations (use your phone for real time responses)`,
-      github: "",
-    },
-    {
-      name: "Resy Booking Automation",
-      description:
-        "A project to automate booking reservations on Resy. Hosted on GitHub -> Transitioning to AWS Lambda",
-      github: "https://github.com/willkieffer/resy-booking-app",
-      readme: "https://raw.githubusercontent.com/willkieffer/resy-booking-app/main/README.md",
-    },
-    */
+  useEffect(() => {
+    document.addEventListener("resize", () => setWindowWidth(window.innerWidth))
+    return () => {
+      document.removeEventListener("resize", () => setWindowWidth(window.innerWidth))
+    }
+  }, [])
 
   useEffect(() => {
     var myHeaders = new Headers()
@@ -65,6 +40,42 @@ const Home = () => {
           setProjects(result)
         })
         .catch((error) => console.error("error", error))
+
+    if (!mealPrepPhoto1)
+      fetch(
+        "https://personalwebsiteresume.blob.core.windows.net/resume/MealPrepApp_Screenshot (1).jpg"
+      )
+        .then((response) => response.blob())
+        .then((result) => {
+          setMealPrepPhoto1(URL.createObjectURL(result))
+        })
+
+    if (!mealPrepPhoto2)
+      fetch(
+        "https://personalwebsiteresume.blob.core.windows.net/resume/MealPrepApp_Screenshot (2).jpg"
+      )
+        .then((response) => response.blob())
+        .then((result) => {
+          setMealPrepPhoto2(URL.createObjectURL(result))
+        })
+
+    if (!mealPrepPhoto3)
+      fetch(
+        "https://personalwebsiteresume.blob.core.windows.net/resume/MealPrepApp_Screenshot (3).jpg"
+      )
+        .then((response) => response.blob())
+        .then((result) => {
+          setMealPrepPhoto3(URL.createObjectURL(result))
+        })
+
+    if (!mealPrepPhoto4)
+      fetch(
+        "https://personalwebsiteresume.blob.core.windows.net/resume/MealPrepApp_Screenshot (4).jpg"
+      )
+        .then((response) => response.blob())
+        .then((result) => {
+          setMealPrepPhoto4(URL.createObjectURL(result))
+        })
   }, [projects])
 
   useEffect(() => {
@@ -111,7 +122,8 @@ const Home = () => {
                 {activeProject.name}
               </Typography>
               <Typography>
-                Last Active: {new Date(activeProject.updated_at).toDateString()}
+                {activeProject.private ? "Created At" : "Last Active"}:{" "}
+                {new Date(activeProject.updated_at).toDateString()}
               </Typography>
               <Typography sx={{ fontStyle: "italic" }}>
                 {activeProject.description ?? "No Description Provided"}
@@ -141,7 +153,13 @@ const Home = () => {
           )}
         </Container>
       </Modal>
-      <Stack direction="row" spacing={4} sx={{ p: 4 }} alignItems="center" justifyContent="center">
+      <Stack
+        direction={windowWidth < 700 ? "column" : "row"}
+        spacing={4}
+        sx={{ p: 4 }}
+        alignItems="center"
+        justifyContent="center"
+      >
         <img
           src={linkedinphoto}
           title="Headshot"
@@ -150,16 +168,137 @@ const Home = () => {
           width={150}
           height={150}
         />
-        <Typography variant="p" style={{ textAlign: "center", maxWidth: "50vw", fontSize: "18px" }}>
+        <Typography
+          variant="p"
+          style={{
+            textAlign: "center",
+            maxWidth: windowWidth < 700 ? null : "50vw",
+            fontSize: "18px",
+          }}
+        >
           Hello! I'm William Kieffer, a software engineer based in NYC. I'm currently finishing my
           senior year at Columbia University and am on the job hunt for when I graduate in May 2024.
           This website contains my resume, links to my social accounts, and some of the projects
           that I've been working on in my free time. Feel free to shoot me an email with any
-          questions or comments, or just to say hi!
+          questions or comments, or just to send a restaurant rec!
         </Typography>
       </Stack>
-      <Typography variant="h6">My Current Projects</Typography>
-      <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={2}>
+      <Stack sx={{ bgcolor: (theme) => theme.palette.secondary.main }}>
+        <Typography variant="h6" color="primary" sx={{ p: 2 }}>
+          Project Spotlight
+        </Typography>
+        <Stack
+          direction={windowWidth < 700 ? "column" : "row"}
+          justifyContent={windowWidth < 700 ? "center" : null}
+        >
+          <Stack
+            direction="column"
+            spacing={2}
+            alignItems={windowWidth < 700 ? "center" : null}
+            style={{
+              width: windowWidth < 700 ? "-webkit-fill-available" : "50%",
+              padding: "20px",
+            }}
+          >
+            <Stack spacing={2} alignItems="center">
+              <img
+                src={logoTransparent}
+                title="MealPrepLogo"
+                id="MealPrepLogo"
+                alt="MealPrepLogo"
+                width={75}
+                height={75}
+              />
+              <Typography variant="h5">Meal Prep Assistant</Typography>
+            </Stack>
+            <Typography variant="h6">Features</Typography>
+            <Typography>
+              📅 Set weekly meal plans and workouts <br />
+            </Typography>
+            <Typography>
+              🍱 Create and edit meals and recipes <br />
+            </Typography>
+            <Typography>
+              🥡 Add one-off meals for restaurants or takeout <br />
+            </Typography>
+            <Typography>
+              ✨ Use generative AI for ideas, ingredients, and recipes <br />
+            </Typography>
+            <Typography>
+              📊 Set goals and track calorie count, protein intake, and expenditure <br />
+            </Typography>
+            <Typography>📋 Export grocery lists to Microsoft To Do</Typography>
+            <Typography variant="h6">Technologies Used</Typography>
+            <Grid container spacing={1}>
+              {[
+                "React",
+                "AWS Amplify",
+                "GraphQL",
+                "AWS DynamoDB",
+                "AWS Cognito",
+                "AWS Lambda",
+                "OpenAI",
+                "Google Cloud Platform",
+                "Microsoft Graph",
+              ].map((tech) => (
+                <Grid item key={tech} sx={{ pr: 1 }}>
+                  <Chip label={tech} />
+                </Grid>
+              ))}
+            </Grid>
+          </Stack>
+          <Stack
+            direction="row"
+            spacing={2}
+            sx={{
+              bgcolor: (theme) => theme.palette.background.paper,
+              overflowX: "scroll",
+              width: windowWidth < 500 ? "-webkit-fill-available" : "45%",
+              padding: "20px",
+              boxShadow: "-4px 0px 20px 5px #00000052",
+              height: "630px",
+            }}
+          >
+            <iframe
+              title="MealPrepVideo"
+              id="MealPrepVideo"
+              frameBorder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              src="https://youtube.com/embed/ixJa6BlQJ34"
+              width={700}
+            ></iframe>
+            <img
+              src={mealPrepPhoto2}
+              alt="mealPrepPhoto2"
+              width={300}
+              style={{ objectFit: "contain" }}
+            />
+            <img
+              src={mealPrepPhoto3}
+              alt="mealPrepPhoto3"
+              width={300}
+              style={{ objectFit: "contain" }}
+            />
+            <img
+              src={mealPrepPhoto4}
+              alt="mealPrepPhoto4"
+              width={300}
+              style={{ objectFit: "contain" }}
+            />
+            <img
+              src={mealPrepPhoto1}
+              alt="mealPrepPhoto1"
+              width={300}
+              style={{ objectFit: "contain" }}
+            />
+          </Stack>
+        </Stack>
+      </Stack>
+      <Typography variant="h6" sx={{ pl: 2, pr: 2 }}>
+        My Current Projects (from GitHub)
+      </Typography>
+      <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={2} sx={{ pl: 2, pr: 2 }}>
         {projects
           .filter((project) => project.owner.login === "willkieffer")
           .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
@@ -167,11 +306,22 @@ const Home = () => {
             return (
               <Paper
                 key={project.id}
-                elevation={3}
-                sx={{ p: 2, bgcolor: "background.paper", cursor: "pointer" }}
-                onClick={() => setActiveProject(project)}
+                elevation={project.private ? 0 : 3}
+                sx={{
+                  p: 2,
+                  bgcolor: "background.paper",
+                  cursor: project.private ? "default" : "pointer",
+                }}
+                onClick={() => setActiveProject(project.private ? null : project)}
               >
-                <Stack>
+                <Stack style={{ position: "relative" }}>
+                  {project.private && (
+                    <Lock
+                      style={{ position: "absolute", top: "0", right: "0" }}
+                      weight="bold"
+                      color="grey"
+                    />
+                  )}
                   <Typography variant="h6" color="primary">
                     {project.name}
                   </Typography>
@@ -182,8 +332,10 @@ const Home = () => {
             )
           }) ?? <Typography>Loading...</Typography>}
       </Masonry>
-      <Typography variant="h6">Other Projects I've Contributed To</Typography>
-      <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={2}>
+      <Typography variant="h6" sx={{ pl: 2, pr: 2 }}>
+        Other Projects I've Contributed To
+      </Typography>
+      <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={2} sx={{ pl: 2, pr: 2 }}>
         {projects
           .filter((project) => project.owner.login !== "willkieffer")
           .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
@@ -191,11 +343,22 @@ const Home = () => {
             return (
               <Paper
                 key={project.id}
-                elevation={3}
-                sx={{ p: 2, bgcolor: "background.paper", cursor: "pointer" }}
-                onClick={() => setActiveProject(project)}
+                elevation={project.private ? 0 : 3}
+                sx={{
+                  p: 2,
+                  bgcolor: "background.paper",
+                  cursor: project.private ? "default" : "pointer",
+                }}
+                onClick={() => setActiveProject(project.private ? null : project)}
               >
-                <Stack>
+                <Stack style={{ position: "relative" }}>
+                  {project.private && (
+                    <Lock
+                      style={{ position: "absolute", top: "0", right: "0" }}
+                      weight="bold"
+                      color="grey"
+                    />
+                  )}
                   <Typography variant="h6" color="primary">
                     {project.name}
                   </Typography>
