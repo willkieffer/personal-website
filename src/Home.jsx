@@ -176,11 +176,11 @@ const Home = () => {
             fontSize: "18px",
           }}
         >
-          Hello! I'm William Kieffer, a software engineer based in NYC. I'm currently finishing my
-          senior year at Columbia University and am on the job hunt for when I graduate in May 2024.
-          This website contains my resume, links to my social accounts, and some of the projects
-          that I've been working on in my free time. Feel free to shoot me an email with any
-          questions or comments, or just to send a restaurant rec!
+          Hi there! I’m William Kieffer, a software engineer based in NYC. I’m currently in my
+          senior year at Columbia University, and I’m searching for a job to begin after graduation
+          in May 2024. This website showcases my resume, links to my social accounts, and some of
+          the projects that I’ve been working on in my free time. Feel free to drop me an email with
+          any questions or comments, or just to say hello!
         </Typography>
       </Stack>
       <Stack sx={{ bgcolor: (theme) => theme.palette.secondary.main }}>
