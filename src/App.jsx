@@ -108,7 +108,7 @@ const Root = () => {
         textAlign="center"
         sx={{ p: 3, boxShadow: "-4px 0px 20px 5px #00000052" }}
       >
-        Last Updated October 2023
+        Last Updated January 2024
       </Typography>
     </ThemeProvider>
   )

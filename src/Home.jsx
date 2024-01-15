@@ -14,12 +14,13 @@ const Home = () => {
   const [mealPrepPhoto2, setMealPrepPhoto2] = useState()
   const [mealPrepPhoto3, setMealPrepPhoto3] = useState()
   const [mealPrepPhoto4, setMealPrepPhoto4] = useState()
+  const [mealPrepPhoto5, setMealPrepPhoto5] = useState()
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   useEffect(() => {
-    document.addEventListener("resize", () => setWindowWidth(window.innerWidth))
+    window.addEventListener("resize", () => setWindowWidth(window.innerWidth))
     return () => {
-      document.removeEventListener("resize", () => setWindowWidth(window.innerWidth))
+      window.removeEventListener("resize", () => setWindowWidth(window.innerWidth))
     }
   }, [])
 
@@ -43,7 +44,7 @@ const Home = () => {
 
     if (!mealPrepPhoto1)
       fetch(
-        "https://personalwebsiteresume.blob.core.windows.net/resume/MealPrepApp_Screenshot (1).jpg"
+        "https://personalwebsiteresume.blob.core.windows.net/resume/MealPrepAssistant_January2024Update_Screenshot (1).jpg"
       )
         .then((response) => response.blob())
         .then((result) => {
@@ -52,7 +53,7 @@ const Home = () => {
 
     if (!mealPrepPhoto2)
       fetch(
-        "https://personalwebsiteresume.blob.core.windows.net/resume/MealPrepApp_Screenshot (2).jpg"
+        "https://personalwebsiteresume.blob.core.windows.net/resume/MealPrepAssistant_January2024Update_Screenshot (2).jpg"
       )
         .then((response) => response.blob())
         .then((result) => {
@@ -61,7 +62,7 @@ const Home = () => {
 
     if (!mealPrepPhoto3)
       fetch(
-        "https://personalwebsiteresume.blob.core.windows.net/resume/MealPrepApp_Screenshot (3).jpg"
+        "https://personalwebsiteresume.blob.core.windows.net/resume/MealPrepAssistant_January2024Update_Screenshot (3).jpg"
       )
         .then((response) => response.blob())
         .then((result) => {
@@ -70,11 +71,20 @@ const Home = () => {
 
     if (!mealPrepPhoto4)
       fetch(
-        "https://personalwebsiteresume.blob.core.windows.net/resume/MealPrepApp_Screenshot (4).jpg"
+        "https://personalwebsiteresume.blob.core.windows.net/resume/MealPrepAssistant_January2024Update_Screenshot (4).jpg"
       )
         .then((response) => response.blob())
         .then((result) => {
           setMealPrepPhoto4(URL.createObjectURL(result))
+        })
+
+    if (!mealPrepPhoto5)
+      fetch(
+        "https://personalwebsiteresume.blob.core.windows.net/resume/MealPrepAssistant_January2024Update_Screenshot (5).jpg"
+      )
+        .then((response) => response.blob())
+        .then((result) => {
+          setMealPrepPhoto5(URL.createObjectURL(result))
         })
   })
 
@@ -219,27 +229,45 @@ const Home = () => {
               🍱 Create and edit meals and recipes <br />
             </Typography>
             <Typography>
-              🥡 Add one-off meals for restaurants or takeout <br />
+              🥡 Add one-off meals for restaurants, leftovers, or takeout <br />
             </Typography>
             <Typography>
               ✨ Use generative AI for ideas, ingredients, and recipes <br />
             </Typography>
             <Typography>
-              📊 Set goals and track calorie count, protein intake, and expenditure <br />
+              📊 Set goals and track nutrients that matter to you <br />
             </Typography>
             <Typography>📋 Export grocery lists to Microsoft To Do</Typography>
+            <Stack
+              spacing={2}
+              sx={{
+                bgcolor: (theme) => theme.palette.background.paper,
+                padding: "20px",
+                boxShadow: "-4px 0px 20px 5px #00000052",
+              }}
+            >
+              <Typography variant="h6">✨New Features in January 2024 Update✨</Typography>
+              <Typography>💧 Hourly hydration reminder push notifications</Typography>
+              <Typography>📈 New graph designs to display more nutrients</Typography>
+              <Typography>🔢 Import nutrition data from the USDA FoodCentral Database</Typography>
+              <Typography>🐛 Offline support + bug fixes and stability improvements!</Typography>
+            </Stack>
             <Typography variant="h6">Technologies Used</Typography>
             <Grid container spacing={1}>
               {[
                 "React",
                 "AWS Amplify",
                 "GraphQL",
+                "REST",
                 "AWS DynamoDB",
                 "AWS Cognito",
                 "AWS Lambda",
                 "OpenAI",
                 "Google Cloud Platform",
                 "Microsoft Graph",
+                "Service Workers",
+                "Web-push Notifications",
+                "PWA",
               ].map((tech) => (
                 <Grid item key={tech} sx={{ pr: 1 }}>
                   <Chip label={tech} />
@@ -253,20 +281,21 @@ const Home = () => {
             sx={{
               bgcolor: (theme) => theme.palette.background.paper,
               overflowX: "scroll",
-              width: windowWidth < 500 ? "-webkit-fill-available" : "45%",
+              width: windowWidth < 700 ? "-webkit-fill-available" : "45%",
               padding: "20px",
               boxShadow: "-4px 0px 20px 5px #00000052",
               height: "630px",
             }}
           >
             <iframe
-              title="MealPrepVideo"
+              title="Meal Prep Assistant - January 2024 Update"
               id="MealPrepVideo"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share"
               loading="lazy"
-              src="https://youtube.com/embed/ixJa6BlQJ34"
               width={700}
+              allowfullscreen
+              src="https://www.youtube.com/embed/V2bWShf3WXQ"
             ></iframe>
             <img
               src={mealPrepPhoto2}
@@ -277,6 +306,12 @@ const Home = () => {
             <img
               src={mealPrepPhoto3}
               alt="mealPrepPhoto3"
+              width={300}
+              style={{ objectFit: "contain" }}
+            />
+            <img
+              src={mealPrepPhoto5}
+              alt="mealPrepPhoto2"
               width={300}
               style={{ objectFit: "contain" }}
             />
