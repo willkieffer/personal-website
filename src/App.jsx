@@ -1,4 +1,11 @@
-import { createBrowserRouter, Link, Outlet, RouterProvider, useLocation } from "react-router-dom"
+import {
+  createBrowserRouter,
+  Link,
+  Navigate,
+  Outlet,
+  RouterProvider,
+  useLocation,
+} from "react-router-dom"
 import Home from "./Home"
 import Resume from "./Resume"
 import Personal from "./Personal"
@@ -22,6 +29,10 @@ function App() {
           path: "/personal",
           element: <Personal />,
           errorElement: <h1>404</h1>,
+        },
+        {
+          path: "/*",
+          element: <Navigate to="/" />,
         },
         {
           index: true,
@@ -108,7 +119,7 @@ const Root = () => {
         textAlign="center"
         sx={{ p: 3, boxShadow: "-4px 0px 20px 5px #00000052" }}
       >
-        Last Updated January 2024
+        Last Updated February 2024
       </Typography>
     </ThemeProvider>
   )
