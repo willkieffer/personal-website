@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react"
-import { Stack, Typography } from "@mui/material"
+import { useEffect, useState } from 'react'
 
 const Home = () => {
-  const [resume, setResume] = useState()
+  const [resume, setResume] = useState<string>()
 
   useEffect(() => {
     const fetchResume = async () => {
       const response = await fetch(
-        "https://personalwebsiteresume.blob.core.windows.net/resume/Resume - William Kieffer.pdf"
+        'https://personalwebsiteresume.blob.core.windows.net/resume/Resume - William Kieffer.pdf'
       )
       const blob = await response.blob()
       setResume(URL.createObjectURL(blob))
@@ -16,15 +15,15 @@ const Home = () => {
   }, [])
 
   return (
-    <Stack alignItems={"center"} justifyContent={"center"}>
-      <Typography variant="p" sx={{ m: 2 }}>
-        PDF not rendering?{" "}
+    <div className="flex flex-col items-center justify-center">
+      <div className="p-4">
+        PDF not rendering?{' '}
         <a href={resume} download="William Kieffer Resume">
           Download a copy
         </a>
-      </Typography>
+      </div>
       <iframe src={resume} width="100%" height="800px" title="resume" />
-    </Stack>
+    </div>
   )
 }
 
