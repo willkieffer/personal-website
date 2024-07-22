@@ -6,7 +6,7 @@ import ReactMarkdown from 'react-markdown'
 import Masonry from '@mui/lab/Masonry'
 import { Lock } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
-import verdeLogo from './assets/icon3.png'
+import verdeLogo from './assets/logoTransparentVerde.png'
 
 type Project = {
   id: number
@@ -170,7 +170,7 @@ const Home = () => {
         </div>
       </div>
       <Link to="https://www.verdefinancialapp.com" target="_blank">
-        <div className="flex items-center justify-center gap-4 bg-green-700 p-8 text-center text-2xl">
+        <div className="flex items-center justify-center gap-4 bg-green-800 p-8 text-center text-2xl">
           <img src={verdeLogo} alt="verdeLogo" width={50} />
           <div>Learn More about Verde Financial</div>
         </div>
