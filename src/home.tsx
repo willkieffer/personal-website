@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import linkedinphoto from './assets/linkedinphoto.png'
 import logoTransparent from './assets/logoTransparent.png'
-import { Button, Container, Modal, Stack } from '@mui/material'
 import ReactMarkdown from 'react-markdown'
 import Masonry from '@mui/lab/Masonry'
 import { Lock } from '@phosphor-icons/react'
@@ -103,62 +102,48 @@ const Home = () => {
 
   return (
     <>
-      <Modal open={activeProject ? true : false} onClose={() => setActiveProject(null)}>
-        <Container
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            maxWidth: '80vw',
-            maxHeight: '80vh',
-            overflowY: 'scroll',
-            transform: 'translate(-50%, -50%)',
-            border: '2px solid #000',
-            bgcolor: 'background.default',
-            boxShadow: 24,
-            borderRadius: '5px',
-          }}
-        >
-          {activeProject && (
-            <Stack
-              sx={{
-                p: 2,
-              }}
-              spacing={2}
-            >
-              <div className="text-lg" color="primary">
-                {activeProject.name}
+      {activeProject && (
+        <>
+          <div
+            onClick={() => setActiveProject(null)}
+            className="fixed left-0 top-0 z-40 h-screen w-screen bg-black opacity-50"
+          ></div>
+          <div
+            className="fixed left-1/2 top-1/2 z-50 overflow-y-scroll rounded-lg border-2 border-black bg-white p-2 shadow-2xl dark:bg-gray-900"
+            style={{ transform: 'translate(-50%, -50%)', maxHeight: '80vh', maxWidth: '80vw' }}
+          >
+            {activeProject && (
+              <div className="flex flex-col gap-2 p-2">
+                <div className="text-lg" color="primary">
+                  {activeProject.name}
+                </div>
+                <div>
+                  {activeProject.private ? 'Created At' : 'Last Active'}:{' '}
+                  {new Date(activeProject.updated_at).toDateString()}
+                </div>
+                <div className="italic">{activeProject.description ?? 'No Description Provided'}</div>
+                <button
+                  disabled={activeProject.private}
+                  onClick={() => window.open(activeProject.html_url, '_blank')}
+                  className="rounded-lg bg-gray-400 p-2 dark:bg-gray-700"
+                >
+                  {activeProject.private ? 'Repo is Private' : 'View Project on GitHub'}
+                </button>
+                {markdownFile ? (
+                  <>
+                    <div className="text-lg" color="primary">
+                      ReadMe.md
+                    </div>
+                    <ReactMarkdown children={markdownFile} />
+                  </>
+                ) : (
+                  <div className="italic">Could not locate readme</div>
+                )}
               </div>
-              <div>
-                {activeProject.private ? 'Created At' : 'Last Active'}:{' '}
-                {new Date(activeProject.updated_at).toDateString()}
-              </div>
-              <div className="italic">{activeProject.description ?? 'No Description Provided'}</div>
-              <Button
-                variant="contained"
-                color="primary"
-                disabled={activeProject.private}
-                sx={{ mb: 2 }}
-                href={activeProject.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {activeProject.private ? 'Repo is Private' : 'View Project on GitHub'}
-              </Button>
-              {markdownFile ? (
-                <>
-                  <div className="text-lg" color="primary">
-                    ReadMe.md
-                  </div>
-                  <ReactMarkdown children={markdownFile} />
-                </>
-              ) : (
-                <div className="italic">Could not locate readme</div>
-              )}
-            </Stack>
-          )}
-        </Container>
-      </Modal>
+            )}
+          </div>
+        </>
+      )}
       <div className="flex flex-col items-center justify-center gap-4 p-6 sm:flex-row">
         <img src={linkedinphoto} title="Headshot" id="headshot" alt="headshot" width={150} height={150} />
         <div className="max-w-screen-md select-none text-center">
@@ -266,27 +251,25 @@ const Home = () => {
                 return (
                   <div
                     key={project.id}
-                    className={`${project.private ? '' : 'cursor-pointer'} select-none rounded-md bg-gray-500 p-2 dark:bg-gray-700`}
+                    className={`${project.private ? '' : 'cursor-pointer'} relative flex select-none flex-col rounded-md bg-gray-400 p-2 dark:bg-gray-700`}
                     onClick={() => setActiveProject(project.private ? null : project)}
                   >
-                    <Stack style={{ position: 'relative' }}>
-                      {project.private && (
-                        <Lock
-                          style={{
-                            position: 'absolute',
-                            top: '0',
-                            right: '0',
-                          }}
-                          weight="bold"
-                          color="grey"
-                        />
-                      )}
-                      <div className="text-lg" color="primary">
-                        {project.name}
-                      </div>
-                      <div>{new Date(project.updated_at).toDateString()}</div>
-                      <div>{project.description}</div>
-                    </Stack>
+                    {project.private && (
+                      <Lock
+                        style={{
+                          position: 'absolute',
+                          top: '10',
+                          right: '10',
+                        }}
+                        weight="bold"
+                        color="grey"
+                      />
+                    )}
+                    <div className="text-lg" color="primary">
+                      {project.name}
+                    </div>
+                    <div>{new Date(project.updated_at).toDateString()}</div>
+                    <div>{project.description}</div>
                   </div>
                 )
               })}
@@ -300,27 +283,25 @@ const Home = () => {
                 return (
                   <div
                     key={project.id}
-                    className={`${project.private ? '' : 'cursor-pointer'} select-none rounded-md bg-gray-500 p-2 dark:bg-gray-700`}
+                    className={`${project.private ? '' : 'cursor-pointer'} relative flex select-none flex-col rounded-md bg-gray-400 p-2 dark:bg-gray-700`}
                     onClick={() => setActiveProject(project.private ? null : project)}
                   >
-                    <Stack style={{ position: 'relative' }}>
-                      {project.private && (
-                        <Lock
-                          style={{
-                            position: 'absolute',
-                            top: '0',
-                            right: '0',
-                          }}
-                          weight="bold"
-                          color="grey"
-                        />
-                      )}
-                      <div className="text-lg" color="primary">
-                        {project.name}
-                      </div>
-                      <div>{new Date(project.updated_at).toDateString()}</div>
-                      <div>{project.description}</div>
-                    </Stack>
+                    {project.private && (
+                      <Lock
+                        style={{
+                          position: 'absolute',
+                          top: '0',
+                          right: '0',
+                        }}
+                        weight="bold"
+                        color="grey"
+                      />
+                    )}
+                    <div className="text-lg" color="primary">
+                      {project.name}
+                    </div>
+                    <div>{new Date(project.updated_at).toDateString()}</div>
+                    <div>{project.description}</div>
                   </div>
                 )
               })}
