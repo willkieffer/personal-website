@@ -1,0 +1,17 @@
+{
+  "trailingSlash": "auto",
+  "routes": [
+    {
+      "route": "/"
+    },
+    {
+      "route": "/resume"
+    },
+    {
+      "route": "/personal"
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  }
+}
