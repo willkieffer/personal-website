@@ -3,7 +3,7 @@ import linkedinphoto from './assets/linkedinphoto.png'
 import logoTransparent from './assets/logoTransparent.png'
 import ReactMarkdown from 'react-markdown'
 import Masonry from '@mui/lab/Masonry'
-import { Lock } from '@phosphor-icons/react'
+import { AppleLogo, Archive, GitBranch, GooglePlayLogo, Lock } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 import verdeLogo from './assets/logoTransparentVerde.png'
 
@@ -13,6 +13,8 @@ type Project = {
   description: string
   url: string
   private: boolean
+  archived: boolean
+  fork: boolean
   updated_at: string
   html_url: string
   owner: {
@@ -109,7 +111,7 @@ const Home = () => {
             className="fixed left-0 top-0 z-40 h-screen w-screen bg-black opacity-50"
           ></div>
           <div
-            className="fixed left-1/2 top-1/2 z-50 overflow-y-scroll rounded-lg border-2 border-black bg-white p-2 shadow-2xl dark:bg-gray-900"
+            className="fixed left-1/2 top-1/2 z-50 overflow-y-scroll rounded-lg border-2 border-black bg-gray-900 p-2 shadow-2xl"
             style={{ transform: 'translate(-50%, -50%)', maxHeight: '80vh', maxWidth: '80vw' }}
           >
             {activeProject && (
@@ -117,15 +119,16 @@ const Home = () => {
                 <div className="text-lg" color="primary">
                   {activeProject.name}
                 </div>
-                <div>
-                  {activeProject.private ? 'Created At' : 'Last Active'}:{' '}
-                  {new Date(activeProject.updated_at).toDateString()}
-                </div>
+                {activeProject.archived ? (
+                  <div className="flex w-min justify-center rounded-full bg-gray-600 px-4 py-2">Archived</div>
+                ) : (
+                  <div>Last Active: {new Date(activeProject.updated_at).toDateString()}</div>
+                )}
                 <div className="italic">{activeProject.description ?? 'No Description Provided'}</div>
                 <button
                   disabled={activeProject.private}
                   onClick={() => window.open(activeProject.html_url, '_blank')}
-                  className="rounded-lg bg-gray-400 p-2 dark:bg-gray-700"
+                  className="rounded-lg bg-gray-700 p-2"
                 >
                   {activeProject.private ? 'Repo is Private' : 'View Project on GitHub'}
                 </button>
@@ -147,10 +150,10 @@ const Home = () => {
       <div className="flex flex-col items-center justify-center gap-4 p-6 sm:flex-row">
         <img src={linkedinphoto} title="Headshot" id="headshot" alt="headshot" width={150} height={150} />
         <div className="max-w-screen-md select-none text-center">
-          Hey! I’m William Kieffer, a software engineer based in NYC. I’ve recently graduated from Columbia University
-          with a Bachelor's degree in Computer Science, and I’m spending my time both searching for a job and working on
-          Verde Financial—a personal finance startup designed to simplify budgeting and debt management. This website
-          showcases my resume, links to my social accounts, and some of the other projects that I’ve been working on in
+          Hey! I'm William Kieffer, a software engineer based in NYC. I graduated from Columbia University with a
+          Bachelor's degree in Computer Science, and I'm spending my time both searching for a job and working on Verde
+          Financial—a personal finance startup designed to simplify budgeting and debt management. This website
+          showcases my resume, links to my social accounts, and some of the other projects that I've been working on in
           my free time. Feel free to drop me an email with any questions or comments, or just to say hello!
         </div>
       </div>
@@ -160,156 +163,119 @@ const Home = () => {
           <div>Learn More about Verde Financial</div>
         </div>
       </Link>
-      <div className="p-4 text-center text-2xl">Project Spotlight</div>
-      <div className="sm:items-normal flex flex-col items-center sm:flex-row">
-        <div className="flex w-full flex-col items-center gap-4 p-2 sm:w-1/2">
-          <div className="flex w-max flex-col items-center justify-center gap-2 rounded-lg bg-gray-400 p-4 dark:bg-gray-700">
-            <img
-              src={logoTransparent}
-              title="MealPrepLogo"
-              id="MealPrepLogo"
-              alt="MealPrepLogo"
-              width={75}
-              height={75}
-            />
-            <div className="text-xl">Meal Prep Assistant</div>
-          </div>
-          <div className="flex w-full flex-col gap-2 rounded-lg bg-slate-400 p-4 dark:bg-gray-700">
-            <div className="text-center text-lg">Features</div>
-            <div>
-              📅 Set weekly meal plans and workouts <br />
-            </div>
-            <div>
-              🍱 Create and edit meals and recipes <br />
-            </div>
-            <div>
-              🥡 Add one-off meals for restaurants, leftovers, or takeout <br />
-            </div>
-            <div>
-              ✨ Use generative AI for ideas, ingredients, and recipes <br />
-            </div>
-            <div>
-              📊 Set goals and track nutrients that matter to you <br />
-            </div>
-            <div>📋 Export grocery lists to Microsoft To Do</div>
-          </div>
-          <div className="flex w-full flex-col gap-2 rounded-lg bg-slate-400 p-4 dark:bg-gray-700">
-            <div className="text-center text-lg">✨New Features in January 2024 Update✨</div>
-            <div>💧 Hourly hydration reminder push notifications</div>
-            <div>📈 New graph designs to display more nutrients</div>
-            <div>🔢 Import nutrition data from the USDA FoodCentral Database</div>
-            <div>🐛 Offline support + bug fixes and stability improvements!</div>
-          </div>
+      <div className="p-4 text-center text-2xl">Personal Project Spotlight</div>
+      <div className="flex flex-col items-center justify-around gap-4 bg-[#fde6ca] p-8 text-center text-2xl text-black md:flex-row">
+        <div className="flex w-max flex-col items-center justify-center gap-2 rounded-lg p-4">
+          <img src={logoTransparent} title="MealPrepLogo" id="MealPrepLogo" alt="MealPrepLogo" width={75} height={75} />
+          <div>Pulse Health Assistant</div>
         </div>
-        <div className="m-2 flex h-min w-full items-center gap-4 overflow-x-scroll rounded-lg bg-gray-400 p-2 sm:w-1/2 dark:bg-gray-700">
-          <iframe
-            title="Meal Prep Assistant - January 2024 Update"
-            id="MealPrepVideo"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share"
-            loading="lazy"
-            allowFullScreen
-            src="https://www.youtube.com/embed/V2bWShf3WXQ"
-          ></iframe>
-          <img src={mealPrepPhoto2} alt="mealPrepPhoto2" width={300} style={{ objectFit: 'contain' }} />
-          <img src={mealPrepPhoto3} alt="mealPrepPhoto3" width={300} style={{ objectFit: 'contain' }} />
-          <img src={mealPrepPhoto5} alt="mealPrepPhoto2" width={300} style={{ objectFit: 'contain' }} />
-          <img src={mealPrepPhoto4} alt="mealPrepPhoto4" width={300} style={{ objectFit: 'contain' }} />
-          <img src={mealPrepPhoto1} alt="mealPrepPhoto1" width={300} style={{ objectFit: 'contain' }} />
+        <div className="flex flex-col items-center justify-center gap-2">
+          <div className="text-xl">Build a plan to reach your health goals.</div>
+          <div>Coming soon to Android and iOS.</div>
+          {/* <div className="mt-2 flex items-center justify-center gap-4">
+            <button className="flex items-center justify-center gap-2 rounded-lg bg-gray-600 px-4 py-2 text-lg">
+              <AppleLogo size={24} />
+              App Store
+            </button>
+            <button className="flex items-center justify-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-lg">
+              <GooglePlayLogo size={24} />
+              Google Play
+            </button>
+          </div> */}
         </div>
       </div>
-      <div className="p-4 text-center text-lg">Technologies Used</div>
-      <div className="flex flex-wrap justify-center gap-3 p-4">
+      <div className="p-4 text-center text-lg">Technologies</div>
+      <div className="flex flex-wrap justify-center gap-3 px-4">
         {[
-          'React',
+          'Flutter',
           'AWS Amplify',
-          'GraphQL',
-          'REST',
+          'AWS AppSync',
           'AWS DynamoDB',
           'AWS Cognito',
           'AWS Lambda',
+          'GraphQL',
           'OpenAI',
           'Google Cloud Platform',
+          'Signin with Apple',
+          'Push Notifications',
           'Microsoft Graph',
-          'Service Workers',
-          'Web-push Notifications',
-          'PWA',
-        ].map((tech) => (
-          <div key={tech} className="rounded-full bg-gray-400 px-4 py-2 dark:bg-gray-700">
-            {tech}
-          </div>
-        ))}
+        ]
+          .sort(() => Math.random() - 0.5)
+          .map((tech) => (
+            <div key={tech} className="rounded-full bg-gray-700 px-4 py-2">
+              {tech}
+            </div>
+          ))}
       </div>
-      <div className="m-8 flex h-0.5 bg-gray-400 dark:bg-gray-700" />
-      {projects.length > 0 ? (
-        <>
-          <div className="p-4 text-center text-lg">My Current Projects (from GitHub)</div>
-          <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={2} sx={{ pl: 2, pr: 2 }}>
-            {projects
-              .filter((project) => project.owner.login === 'willkieffer')
-              .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
-              .map((project) => {
-                return (
-                  <div
-                    key={project.id}
-                    className={`${project.private ? '' : 'cursor-pointer'} relative flex select-none flex-col rounded-md bg-gray-400 p-2 dark:bg-gray-700`}
-                    onClick={() => setActiveProject(project.private ? null : project)}
-                  >
-                    {project.private && (
-                      <Lock
-                        style={{
-                          position: 'absolute',
-                          top: '10',
-                          right: '10',
-                        }}
-                        weight="bold"
-                        color="grey"
-                      />
-                    )}
-                    <div className="text-lg" color="primary">
-                      {project.name}
+      <div className="m-8 border" />
+      <div className="flex flex-col items-center justify-center">
+        {projects.length > 0 ? (
+          <>
+            <div className="p-4 text-center text-lg">My Current Projects (from GitHub)</div>
+            <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={2} sx={{ pl: 2, pr: 2 }}>
+              {projects
+                .filter((project) => project.owner.login === 'willkieffer')
+                .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
+                .map((project) => {
+                  return (
+                    <div className="flex flex-col">
+                      {project.archived || project.private || project.fork ? (
+                        <div className="mx-4 flex w-min gap-2 rounded-t-lg bg-gray-600 p-2">
+                          {project.archived && <Archive weight="duotone" />}
+                          {project.private && <Lock weight="duotone" />}
+                          {project.fork && <GitBranch weight="duotone" />}
+                        </div>
+                      ) : null}
+                      <div
+                        key={project.id}
+                        className={`${project.private ? '' : 'cursor-pointer'} ${project.archived ? 'bg-gray-600' : 'bg-gray-700'} relative flex select-none flex-col rounded-md p-2`}
+                        onClick={() => setActiveProject(project.private ? null : project)}
+                      >
+                        <div className="text-lg" color="primary">
+                          {project.name}
+                        </div>
+                        {!project.archived && (
+                          <div className="text-sm">Updated {new Date(project.updated_at).toDateString()}</div>
+                        )}
+                        <div className="pt-2">{project.description}</div>
+                      </div>
                     </div>
-                    <div>{new Date(project.updated_at).toDateString()}</div>
-                    <div>{project.description}</div>
-                  </div>
-                )
-              })}
-          </Masonry>
-          <div className="p-4 text-center text-lg">Other Projects I've Contributed To</div>
-          <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={2} sx={{ pl: 2, pr: 2 }}>
-            {projects
-              .filter((project) => project.owner.login !== 'willkieffer')
-              .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
-              .map((project) => {
-                return (
-                  <div
-                    key={project.id}
-                    className={`${project.private ? '' : 'cursor-pointer'} relative flex select-none flex-col rounded-md bg-gray-400 p-2 dark:bg-gray-700`}
-                    onClick={() => setActiveProject(project.private ? null : project)}
-                  >
-                    {project.private && (
-                      <Lock
-                        style={{
-                          position: 'absolute',
-                          top: '0',
-                          right: '0',
-                        }}
-                        weight="bold"
-                        color="grey"
-                      />
-                    )}
-                    <div className="text-lg" color="primary">
-                      {project.name}
+                  )
+                })}
+            </Masonry>
+            <div className="p-4 text-center text-lg">Other Projects I've Contributed To</div>
+            <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={2} sx={{ pl: 2, pr: 2 }}>
+              {projects
+                .filter((project) => project.owner.login !== 'willkieffer')
+                .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
+                .map((project) => {
+                  return (
+                    <div
+                      key={project.id}
+                      className={`${project.private ? '' : 'cursor-pointer'} ${project.archived ? 'bg-gray-600' : 'bg-gray-700'} relative flex select-none flex-col rounded-md p-2`}
+                      onClick={() => setActiveProject(project.private ? null : project)}
+                    >
+                      <div className="absolute right-0 top-0 m-2 flex gap-2">
+                        {project.archived && <Archive weight="duotone" color="grey" />}
+                        {project.private && <Lock weight="duotone" color="grey" />}
+                        {project.fork && <GitBranch weight="duotone" color="grey" />}
+                      </div>
+                      <div className="text-lg" color="primary">
+                        {project.name}
+                      </div>
+                      {!project.archived && (
+                        <div className="text-sm">Updated {new Date(project.updated_at).toDateString()}</div>
+                      )}
+                      <div className="pt-2">{project.description}</div>
                     </div>
-                    <div>{new Date(project.updated_at).toDateString()}</div>
-                    <div>{project.description}</div>
-                  </div>
-                )
-              })}
-          </Masonry>
-        </>
-      ) : (
-        <div className="text-center">There was a problem fetching from GitHub</div>
-      )}
+                  )
+                })}
+            </Masonry>
+          </>
+        ) : (
+          <div className="text-center">There was a problem fetching from GitHub</div>
+        )}
+      </div>
     </>
   )
 }

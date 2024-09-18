@@ -2,7 +2,16 @@ import { createBrowserRouter, Link, Navigate, Outlet, RouterProvider, useLocatio
 import Home from './home.tsx'
 import Resume from './resume.tsx'
 import Personal from './personal.tsx'
-import { EnvelopeSimple, GithubLogo, LinkedinLogo } from '@phosphor-icons/react'
+import BikeRackLocator from './nycbikeracks.tsx'
+import {
+  Bicycle,
+  EnvelopeSimple,
+  GithubLogo,
+  HouseSimple,
+  LinkedinLogo,
+  PersonArmsSpread,
+  ReadCvLogo,
+} from '@phosphor-icons/react'
 
 function App() {
   const router = createBrowserRouter([
@@ -28,6 +37,13 @@ function App() {
           ),
         },
         {
+          path: '/nycbikeracks',
+          element: <BikeRackLocator />,
+          errorElement: (
+            <div className="flex items-center justify-center p-8">Uh oh! There was a problem loading this content.</div>
+          ),
+        },
+        {
           path: '/*',
           element: <Navigate to="/" />,
         },
@@ -48,18 +64,6 @@ function App() {
 const Root = () => {
   const location = useLocation()
 
-  // const theme = createTheme({
-  //   palette: {
-  //     primary: blueGrey,
-  //     secondary: {
-  //       main: '#e2ebef',
-  //     },
-  //     background: {
-  //       paper: '#fafafa',
-  //     },
-  //   },
-  // })
-
   return (
     <>
       <div>
@@ -78,31 +82,32 @@ const Root = () => {
           </div>
         </div>
         <div className="flex flex-wrap justify-around">
-          <Link to={'/'}>
-            <div className={`${location.pathname === '/' ? 'font-bold' : null} w-36 cursor-pointer p-6 text-center`}>
-              HOME
-            </div>
-          </Link>
-          <Link to={'/resume'}>
-            <div
-              className={`${location.pathname === '/resume' ? 'font-bold' : null} w-36 cursor-pointer p-6 text-center`}
-            >
-              RESUME
-            </div>
-          </Link>
-          <Link to={'/personal'}>
-            <div
-              className={`${location.pathname === '/personal' ? 'font-bold' : null} w-36 cursor-pointer p-6 text-center`}
-            >
-              PERSONAL
-            </div>
-          </Link>
+          {['', 'resume', 'personal', 'nycbikeracks'].map((path) => (
+            <Link key={path} to={`/${path}`}>
+              <div
+                className={`${location.pathname === `/${path}` ? 'border-b-2' : null} w-18 flex cursor-pointer items-center justify-center p-4`}
+              >
+                {path === '' ? (
+                  <HouseSimple size={32} weight={location.pathname === `/${path}` ? 'duotone' : 'regular'} />
+                ) : null}
+                {path === 'resume' ? (
+                  <ReadCvLogo size={32} weight={location.pathname === `/${path}` ? 'duotone' : 'regular'} />
+                ) : null}
+                {path === 'personal' ? (
+                  <PersonArmsSpread size={32} weight={location.pathname === `/${path}` ? 'duotone' : 'regular'} />
+                ) : null}
+                {path === 'nycbikeracks' ? (
+                  <Bicycle size={32} weight={location.pathname === `/${path}` ? 'duotone' : 'regular'} />
+                ) : null}
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
       <div className="flex flex-col gap-2">
         <Outlet />
       </div>
-      <div className="p-8 text-center">Last Updated July 2024</div>
+      <div className="p-8 text-center">Last Updated September 2024</div>
     </>
   )
 }

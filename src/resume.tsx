@@ -18,7 +18,7 @@ const Home = () => {
     <div className="flex flex-col items-center justify-center">
       <div className="p-4">
         PDF not rendering?{' '}
-        <a href={resume} download="William Kieffer Resume">
+        <a href={resume} download="William Kieffer Resume" className="underline underline-offset-2">
           Download a copy
         </a>
       </div>
