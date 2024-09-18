@@ -3,7 +3,7 @@ import linkedinphoto from './assets/linkedinphoto.png'
 import logoTransparent from './assets/logoTransparent.png'
 import ReactMarkdown from 'react-markdown'
 import Masonry from '@mui/lab/Masonry'
-import { AppleLogo, Archive, GitBranch, GooglePlayLogo, Lock } from '@phosphor-icons/react'
+import { Archive, GitBranch, Lock } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 import verdeLogo from './assets/logoTransparentVerde.png'
 
@@ -172,16 +172,6 @@ const Home = () => {
         <div className="flex flex-col items-center justify-center gap-2">
           <div className="text-xl">Build a plan to reach your health goals.</div>
           <div>Coming soon to Android and iOS.</div>
-          {/* <div className="mt-2 flex items-center justify-center gap-4">
-            <button className="flex items-center justify-center gap-2 rounded-lg bg-gray-600 px-4 py-2 text-lg">
-              <AppleLogo size={24} />
-              App Store
-            </button>
-            <button className="flex items-center justify-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-lg">
-              <GooglePlayLogo size={24} />
-              Google Play
-            </button>
-          </div> */}
         </div>
       </div>
       <div className="p-4 text-center text-lg">Technologies</div>
