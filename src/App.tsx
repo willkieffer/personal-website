@@ -1,4 +1,4 @@
-import { createBrowserRouter, Link, Navigate, Outlet, RouterProvider, useLocation } from 'react-router-dom'
+import { createBrowserRouter, Link, Outlet, RouterProvider, useLocation } from 'react-router-dom'
 import Home from './home.tsx'
 import Resume from './resume.tsx'
 import Personal from './personal.tsx'
@@ -12,6 +12,7 @@ import {
   PersonArmsSpread,
   ReadCvLogo,
 } from '@phosphor-icons/react'
+import PulsePrivacy from './pulsePrivacyPolicy.tsx'
 
 function App() {
   const router = createBrowserRouter([
@@ -44,10 +45,6 @@ function App() {
           ),
         },
         {
-          path: '/*',
-          element: <Navigate to="/" />,
-        },
-        {
           index: true,
           element: <Home />,
           errorElement: (
@@ -55,6 +52,13 @@ function App() {
           ),
         },
       ],
+    },
+    {
+      path: '/pulse-privacy-policy',
+      element: <PulsePrivacy />,
+      errorElement: (
+        <div className="flex items-center justify-center p-8">Uh oh! There was a problem loading this content.</div>
+      ),
     },
   ])
 
