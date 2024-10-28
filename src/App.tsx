@@ -12,7 +12,6 @@ import {
   PersonArmsSpread,
   ReadCvLogo,
 } from '@phosphor-icons/react'
-import PulsePrivacy from './pulsePrivacyPolicy.tsx'
 
 function App() {
   const router = createBrowserRouter([
@@ -52,13 +51,6 @@ function App() {
           ),
         },
       ],
-    },
-    {
-      path: '/pulse-privacy-policy',
-      element: <PulsePrivacy />,
-      errorElement: (
-        <div className="flex items-center justify-center p-8">Uh oh! There was a problem loading this content.</div>
-      ),
     },
   ])
 

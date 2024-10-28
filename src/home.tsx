@@ -172,6 +172,11 @@ const Home = () => {
         <div className="flex flex-col items-center justify-center gap-2">
           <div className="text-xl">Build a plan to reach your health goals.</div>
           <div>Coming soon to Android and iOS.</div>
+          <div className="text-lg underline underline-offset-2">
+            <a href="https://pulse.williamkieffer.works/" target="_blank">
+              Learn More
+            </a>
+          </div>
         </div>
       </div>
       <div className="p-4 text-center text-lg">Technologies</div>
