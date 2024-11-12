@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import linkedinphoto from './assets/linkedinphoto.png'
-import logoTransparent from './assets/logoTransparent.png'
+import pulseLogo from './assets/pulseLogo.png'
+import verdeLogo from './assets/verdeLogo.png'
+import appleAppStore from './assets/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg'
 import ReactMarkdown from 'react-markdown'
 import Masonry from '@mui/lab/Masonry'
 import { Archive, GitBranch, Lock } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
-import verdeLogo from './assets/logoTransparentVerde.png'
 
 type Project = {
   id: number
@@ -158,20 +159,26 @@ const Home = () => {
         </div>
       </div>
       <Link to="https://www.verdefinancialapp.com" target="_blank">
-        <div className="flex items-center justify-center gap-4 bg-green-800 p-8 text-center text-2xl">
-          <img src={verdeLogo} alt="verdeLogo" width={50} />
+        <div className="flex items-center justify-center gap-4 bg-[#50a464] p-4 text-center text-2xl">
+          <img src={verdeLogo} alt="verdeLogo" width={75} />
           <div>Learn More about Verde Financial</div>
         </div>
       </Link>
       <div className="p-4 text-center text-2xl">Personal Project Spotlight</div>
-      <div className="flex flex-col items-center justify-around gap-4 bg-[#fde6ca] p-8 text-center text-2xl text-black md:flex-row">
-        <div className="flex w-max flex-col items-center justify-center gap-2 rounded-lg p-4">
-          <img src={logoTransparent} title="MealPrepLogo" id="MealPrepLogo" alt="MealPrepLogo" width={75} height={75} />
+      <div className="flex flex-col items-center justify-around gap-4 bg-[#fde6ca] p-4 text-center text-2xl text-black md:flex-row">
+        <div className="flex w-max flex-col items-center justify-center gap-1 rounded-lg p-4">
+          <img src={pulseLogo} title="MealPrepLogo" id="MealPrepLogo" alt="MealPrepLogo" width={75} height={75} />
           <div>Pulse Health Assistant</div>
+          <div className="text-lg">Build a plan to reach your health goals.</div>
         </div>
         <div className="flex flex-col items-center justify-center gap-2">
-          <div className="text-xl">Build a plan to reach your health goals.</div>
-          <div>Coming soon to Android and iOS.</div>
+          <div
+            className="m-1 cursor-pointer"
+            onClick={() => window.open('https://apps.apple.com/us/app/pulse-health-assistant/id6670768611', '_blank')}
+          >
+            <img src={appleAppStore} title="Apple App Store" id="Apple App Store" alt="Apple App Store" width={150} />
+          </div>
+          <div className="text-sm">(Coming soon to Android)</div>
           <div className="text-lg underline underline-offset-2">
             <a href="https://pulse.williamkieffer.works/" target="_blank">
               Learn More
