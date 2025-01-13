@@ -180,7 +180,7 @@ const Home = () => {
           </div>
           <div className="text-sm">(Coming soon to Android)</div>
           <div className="text-lg underline underline-offset-2">
-            <a href="https://pulse.williamkieffer.works/" target="_blank">
+            <a href="https://pulse.williamkieffer.works/" target="_blank" rel="noopener">
               Learn More
             </a>
           </div>
