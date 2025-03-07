@@ -103,7 +103,7 @@ const BikeRackLocator = () => {
               <div key={index} className="m-2 rounded-md bg-slate-700 p-4">
                 <a
                   className="underline underline-offset-2"
-                  href={`https://www.google.com/maps/search/?api=1&query=${bikeRack.longitude},${bikeRack.latitude}`}
+                  href={`https://www.google.com/maps/search/?api=1&query=${bikeRack.latitude},${bikeRack.longitude}`}
                   target="_blank"
                 >
                   {bikeRack.ifoaddress} in {bikeRack.boroname}

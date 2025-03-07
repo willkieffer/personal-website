@@ -103,7 +103,7 @@ const Root = () => {
       <div className="flex flex-col gap-2">
         <Outlet />
       </div>
-      <div className="p-8 text-center">Last Updated January 2025</div>
+      <div className="p-8 text-center">Last Updated March 2025</div>
     </>
   )
 }
