@@ -9,6 +9,9 @@
     },
     {
       "route": "/personal"
+    },
+    {
+      "route": "/nycbikeracks"
     }
   ],
   "navigationFallback": {

@@ -1,5 +1,5 @@
 import { ArrowsClockwise, PersonSimpleBike } from '@phosphor-icons/react'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 type BikeRack = {
   distance: string
@@ -14,43 +14,103 @@ type BikeRack = {
   racktype?: string
 }
 
+type Location = {
+  lat: number
+  long: number
+  acc: number
+}
+
+const SEARCH_RADIUS_METERS = 500
+
+const geolocationOptions: PositionOptions = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+}
+
+const getGeolocationErrorMessage = (error: GeolocationPositionError) => {
+  if (error.code === error.PERMISSION_DENIED)
+    return 'Location access was denied. Enable location access to find nearby bike racks.'
+  if (error.code === error.POSITION_UNAVAILABLE) return 'Your current location is unavailable right now.'
+  if (error.code === error.TIMEOUT) return 'Finding your location timed out. Try refreshing the search.'
+  return 'There was a problem finding your current location.'
+}
+
+const isAbortError = (error: unknown) => error instanceof DOMException && error.name === 'AbortError'
+
 const BikeRackLocator = () => {
   const [loading, setLoading] = useState(false)
   const [bikeRacks, setBikeRacks] = useState<BikeRack[]>([])
-  const [location, setLocation] = useState<{ lat: number; long: number; acc: number }>({ lat: 0, long: 0, acc: 0 })
+  const [location, setLocation] = useState<Location | null>(null)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-  const options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0,
-  }
+  const fetchBikeRacks = useCallback(async (lat: number, long: number, radius: number, signal?: AbortSignal) => {
+    const params = new URLSearchParams({
+      $where: `within_circle(the_geom, ${lat}, ${long}, ${radius})`,
+      $select:
+        "distance_in_meters(the_geom, 'POINT(" +
+        `${long} ${lat}` +
+        ")') AS distance, boroname, ifoaddress, onstreet, fromstreet, tostreet, side_of_st, racktype, latitude, longitude",
+      $order: 'distance ASC',
+      $limit: '10',
+    })
 
-  function success(pos: { coords: any }) {
-    const crd = pos.coords
-    setLocation({ lat: crd.latitude, long: crd.longitude, acc: crd.accuracy })
-    fetchBikeRacks(crd.latitude, crd.longitude, 500)
-  }
+    const response = await fetch(`https://data.cityofnewyork.us/resource/592z-n7dk.json?${params.toString()}`, {
+      signal,
+    })
+    if (!response.ok) throw new Error(`NYC OpenData returned ${response.status}`)
 
-  function error(err: { code: any; message: any }) {
-    console.warn(`ERROR(${err.code}): ${err.message}`)
-    setLoading(false)
-  }
-
-  const fetchBikeRacks = async (lat: String, long: String, radius: number) => {
-    const response = await fetch(
-      `https://data.cityofnewyork.us/resource/592z-n7dk.json?$where=within_circle(the_geom, ${lat}, ${long}, ${radius})&$select=distance_in_meters(the_geom, 'POINT(${long} ${lat})') AS distance, boroname, ifoaddress, onstreet, fromstreet, tostreet, side_of_st, racktype, latitude, longitude&$order=distance ASC&$limit=10`
-    )
-
-    const data = await response.json()
+    const data = (await response.json()) as BikeRack[]
     setBikeRacks(data)
-    setLoading(false)
-  }
+  }, [])
+
+  const requestLocation = useCallback(
+    (signal?: AbortSignal) => {
+      if (!navigator.geolocation) {
+        setErrorMessage('Geolocation is not available in this browser.')
+        return
+      }
+
+      setLoading(true)
+      setBikeRacks([])
+      setErrorMessage(null)
+
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          if (signal?.aborted) return
+
+          const { latitude, longitude, accuracy } = pos.coords
+          setLocation({ lat: latitude, long: longitude, acc: accuracy })
+
+          fetchBikeRacks(latitude, longitude, SEARCH_RADIUS_METERS, signal)
+            .catch((fetchError) => {
+              if (!isAbortError(fetchError)) {
+                setBikeRacks([])
+                setErrorMessage('There was a problem loading nearby bike racks from NYC OpenData.')
+              }
+            })
+            .finally(() => {
+              if (!signal?.aborted) setLoading(false)
+            })
+        },
+        (error) => {
+          if (signal?.aborted) return
+
+          setErrorMessage(getGeolocationErrorMessage(error))
+          setLoading(false)
+        },
+        geolocationOptions
+      )
+    },
+    [fetchBikeRacks]
+  )
 
   useEffect(() => {
-    setLoading(true)
-    setBikeRacks([])
-    navigator.geolocation.getCurrentPosition(success, error, options)
-  }, [])
+    const controller = new AbortController()
+    requestLocation(controller.signal)
+
+    return () => controller.abort()
+  }, [requestLocation])
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -60,6 +120,7 @@ const BikeRackLocator = () => {
           <a
             href="https://data.cityofnewyork.us/Transportation/Bicycle-Parking/592z-n7dk/about_data"
             target="_blank"
+            rel="noopener noreferrer"
             className="underline underline-offset-2"
           >
             NYC OpenData
@@ -70,43 +131,55 @@ const BikeRackLocator = () => {
         <div className="pb-6 text-2xl">Nearest Bike Racks</div>
         <div className="flex items-end justify-between gap-4">
           <div className="text-lg">
-            You are currently at{' '}
-            <a
-              className="underline underline-offset-2"
-              href={`https://www.google.com/maps/search/?api=1&query=${location.lat},${location.long}`}
-              target="_blank"
-            >
-              {location.lat.toFixed(4)}, {location.long.toFixed(4)}
-            </a>{' '}
-            with an accuracy of {location.acc.toFixed(0)} meters.
+            {location ? (
+              <>
+                You are currently at{' '}
+                <a
+                  className="underline underline-offset-2"
+                  href={`https://www.google.com/maps/search/?api=1&query=${location.lat},${location.long}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {location.lat.toFixed(4)}, {location.long.toFixed(4)}
+                </a>{' '}
+                with an accuracy of {location.acc.toFixed(0)} meters.
+              </>
+            ) : (
+              'Finding your location...'
+            )}
           </div>
           <button
-            className="flex items-center justify-center gap-2 rounded-full bg-slate-600 px-4 py-2"
-            onClick={() => {
-              setLoading(true)
-              setBikeRacks([])
-              navigator.geolocation.getCurrentPosition(success, error, options)
-            }}
+            type="button"
+            className="flex items-center justify-center gap-2 rounded-full bg-slate-600 px-4 py-2 disabled:cursor-not-allowed disabled:opacity-60"
+            onClick={() => requestLocation()}
+            disabled={loading}
+            aria-label="Refresh bike rack search"
+            title="Refresh"
           >
-            <ArrowsClockwise size={24} />
+            <ArrowsClockwise size={24} aria-hidden />
           </button>
         </div>
-        <div className="mt-4 flex h-96 flex-col gap-4 overflow-y-scroll">
+        {errorMessage ? <div className="mt-4 rounded-md bg-red-900/60 p-4">{errorMessage}</div> : null}
+        <div className="mt-4 flex h-96 flex-col gap-4 overflow-y-auto">
           {loading ? (
             <div className="flex h-96 animate-bounce items-center justify-center">
-              <PersonSimpleBike size={64} />
+              <PersonSimpleBike size={64} aria-label="Loading nearby bike racks" />
             </div>
-          ) : bikeRacks.length === 0 ? (
+          ) : !errorMessage && bikeRacks.length === 0 ? (
             <div className="rounded-md bg-slate-700 p-4">No bike racks found within 500 meters. Bummer!</div>
           ) : (
-            bikeRacks.map((bikeRack, index) => (
-              <div key={index} className="m-2 rounded-md bg-slate-700 p-4">
+            bikeRacks.map((bikeRack) => (
+              <div
+                key={`${bikeRack.latitude}-${bikeRack.longitude}-${bikeRack.distance}`}
+                className="m-2 rounded-md bg-slate-700 p-4"
+              >
                 <a
                   className="underline underline-offset-2"
                   href={`https://www.google.com/maps/search/?api=1&query=${bikeRack.latitude},${bikeRack.longitude}`}
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  {bikeRack.ifoaddress} in {bikeRack.boroname}
+                  {bikeRack.ifoaddress ?? 'Bike rack'} in {bikeRack.boroname ?? 'NYC'}
                 </a>
                 <div className="mt-4 flex flex-wrap gap-4">
                   {[
@@ -117,13 +190,12 @@ const BikeRackLocator = () => {
                       : null,
                     bikeRack.side_of_st ? `${bikeRack.side_of_st} side of the street` : null,
                     bikeRack.racktype,
-                  ].map(
-                    (line, index) =>
-                      line && (
-                        <div key={index} className="rounded-full bg-slate-500 px-4 py-2">
-                          {line}
-                        </div>
-                      )
+                  ].map((line) =>
+                    line ? (
+                      <div key={line} className="rounded-full bg-slate-500 px-4 py-2">
+                        {line}
+                      </div>
+                    ) : null
                   )}
                 </div>
               </div>
@@ -131,24 +203,30 @@ const BikeRackLocator = () => {
           )}
         </div>
         <div className="flex flex-wrap gap-4 py-4">
-          <button
+          <a
             className="rounded-full bg-emerald-600 px-4 py-2"
-            onClick={() => window.open('https://portal.311.nyc.gov/article/?kanumber=KA-02576', '_blank')}
+            href="https://portal.311.nyc.gov/article/?kanumber=KA-02576"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Request a bike rack
-          </button>
-          <button
+          </a>
+          <a
             className="rounded-full bg-red-500 px-4 py-2"
-            onClick={() => window.open('https://portal.311.nyc.gov/article/?kanumber=KA-01072', '_blank')}
+            href="https://portal.311.nyc.gov/article/?kanumber=KA-01072"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Report a bike rack issue
-          </button>
-          <button
+          </a>
+          <a
             className="rounded-full bg-orange-400 px-4 py-2"
-            onClick={() => window.open('https://portal.311.nyc.gov/article/?kanumber=KA-02218', '_blank')}
+            href="https://portal.311.nyc.gov/article/?kanumber=KA-02218"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Report abandoned bike
-          </button>
+          </a>
         </div>
       </div>
     </div>
