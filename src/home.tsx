@@ -75,67 +75,67 @@ const proofPoints = [
 ]
 
 const privatePlatformSnapshot = [
-  { value: 'Desktop + cloud', label: 'Electron app, GraphQL API, and AWS-backed services' },
-  { value: 'Workflow depth', label: 'Projects, quoting, files, email, tasks, analytics, and admin tools' },
-  { value: 'Production polish', label: 'Updates, permissions, observability, docs, and accessibility settings' },
+  { value: 'Hybrid application', label: 'Electron client with a GraphQL API and AWS-backed services' },
+  { value: 'Operational scope', label: 'Projects, quoting, files, email, tasks, analytics, and administration' },
+  { value: 'Production support', label: 'Updates, permissions, observability, documentation, and accessibility settings' },
 ]
 
 const privatePlatformHighlights = [
   {
-    title: 'Desktop-grade file workspace',
+    title: 'Desktop file management',
     description:
-      'Built a project file explorer with multi-select, server-side move/copy flows, signed URL access, active file presence, and Windows drag-and-drop behavior that feels native instead of web-adjacent.',
+      'The project file explorer supports multi-select, server-side move and copy operations, signed URL access, active file presence, and Windows drag-and-drop behavior across desktop and cloud storage boundaries.',
     icon: Folders,
   },
   {
-    title: 'Quote and proposal engine',
+    title: 'Quoting and document generation',
     description:
-      'Designed spreadsheet-like editors for dense line-item work: keyboard navigation, bulk editing, import helpers, approval states, finalization, exports, and generated PDF/Excel documents.',
+      'Spreadsheet-style quote editors handle dense line-item data with keyboard navigation, bulk editing, import workflows, approval states, finalization steps, and generated PDF and Excel documents.',
     icon: FileText,
   },
   {
-    title: 'Realtime collaboration layer',
+    title: 'Realtime collaboration',
     description:
-      'Added WebSocket-backed editing, version locks, change review flows, project chat, notifications, and cross-window clipboard state so multiple people can work without stepping on each other.',
+      'WebSocket-backed editing, version locks, change review flows, project chat, notifications, and cross-window clipboard state coordinate concurrent work across the application.',
     icon: UsersThree,
   },
   {
-    title: 'Full-stack data system',
+    title: 'Typed data and permissions',
     description:
-      'Maintained a typed GraphQL surface with generated clients, resolvers, migrations, authorization rules, search/filter metadata, and backend utilities that keep complex business records coherent.',
+      'The data layer uses generated GraphQL clients, resolvers, migrations, authorization rules, search and filter metadata, and backend utilities for consistent business record handling.',
     icon: Database,
   },
   {
-    title: 'AI and analytics surfaces',
+    title: 'Assistant and analytics features',
     description:
-      'Integrated an in-app assistant, attachment-aware workflows, natural-language table controls, email processing, and analytics dashboards while keeping review and approval moments explicit.',
+      'The application includes an in-app assistant, attachment-aware workflows, natural-language table controls, email processing, and analytics dashboards with explicit review and approval steps.',
     icon: Sparkle,
   },
   {
-    title: 'Operational hardening',
+    title: 'Release and reliability',
     description:
-      'Handled client version gating, automatic update states, Sentry reporting, release packaging, native module rebuilds, and settings for text size and zoom in a Windows desktop shell.',
+      'Production support includes client version gating, automatic update states, Sentry reporting, release packaging, native module rebuilds, and display settings for text size and zoom.',
     icon: ShieldCheck,
   },
 ]
 
 const privatePlatformArchitecture = [
   {
-    title: 'Electron shell',
+    title: 'Electron application shell',
     description:
-      'Main, preload, and renderer layers coordinate secure IPC, custom window chrome, local file access, document generation, and native Windows integrations.',
+      'Main, preload, and renderer layers coordinate secure IPC, custom window chrome, local file access, document generation, and native Windows integration points.',
     icon: Desktop,
   },
   {
-    title: 'Typed product UI',
+    title: 'React renderer',
     description:
-      'React, Chakra UI, Apollo, generated GraphQL types, saved table state, keyboard shortcuts, and dense workflows tuned for daily operational use.',
+      'React, Chakra UI, Apollo, generated GraphQL types, saved table state, and keyboard shortcuts support high-density operational workflows.',
     icon: TerminalWindow,
   },
   {
-    title: 'Cloud services',
+    title: 'Backend services',
     description:
-      'Serverless GraphQL, WebSocket handlers, auth, S3-backed files, migrations, email workflows, and infrastructure code support the desktop experience.',
+      'Serverless GraphQL, WebSocket handlers, authentication, S3-backed files, database migrations, email workflows, and infrastructure code support the desktop client.',
     icon: CloudArrowUp,
   },
 ]
@@ -232,7 +232,7 @@ const Home = () => {
     return (
       <article
         key={project.id}
-        className="group flex h-full flex-col rounded-md border border-white/10 bg-zinc-950/50 p-4 shadow-[0_18px_45px_rgba(0,0,0,0.22)] transition-colors hover:border-cyan-300/35 hover:bg-zinc-900/80"
+        className="group flex flex-col rounded-md border border-white/10 bg-zinc-950/50 p-4 shadow-[0_18px_45px_rgba(0,0,0,0.22)] transition-colors hover:border-cyan-300/35 hover:bg-zinc-900/80"
       >
         <div className="flex items-start justify-between gap-3">
           <button
@@ -390,8 +390,7 @@ const Home = () => {
           <div className="absolute -bottom-5 left-4 right-4 rounded-md border border-white/10 bg-zinc-950/90 p-4 shadow-2xl backdrop-blur">
             <div className="text-sm uppercase tracking-[0.18em] text-cyan-200">Currently</div>
             <div className="mt-1 text-sm leading-6 text-zinc-300">
-              Building a private desktop operations platform that turns messy business workflows into reliable,
-              everyday software.
+              Developing a private desktop operations platform for complex B2B workflows.
             </div>
           </div>
         </div>
@@ -418,26 +417,26 @@ const Home = () => {
               <div className="max-w-3xl">
                 <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1 text-sm font-medium text-cyan-100">
                   <Lock size={15} weight="duotone" aria-hidden />
-                  Confidential flagship project
+                  Confidential production platform
                 </div>
                 <h3 className="mt-5 text-3xl font-semibold leading-tight text-white sm:text-4xl">
                   Private ERP/CRM desktop platform
                 </h3>
                 <p className="mt-5 text-lg leading-8 text-zinc-300">
-                  A production Electron application for a specialized B2B operations team. I built it to replace
-                  fragile spreadsheet-and-email workflows with a desktop-first system for projects, quote generation,
-                  files, task management, internal communication, analytics, and administration.
+                  A production Electron application for a specialized B2B operations team, developed to consolidate
+                  project tracking, quote generation, file management, task coordination, internal communication,
+                  analytics, and administration in one desktop-first system.
                 </p>
                 <p className="mt-4 leading-7 text-zinc-400">
-                  The interesting part is the product density: it is not a single-feature demo. It is a full operating
-                  surface where cloud data, local desktop behavior, documents, permissions, updates, and daily user
-                  workflows all have to cooperate without making the interface feel heavy.
+                  The case study is focused on product and systems complexity rather than public branding. The
+                  application combines cloud data, local desktop behavior, document workflows, permissions, release
+                  management, and daily operational tasks within a cohesive interface.
                 </p>
               </div>
               <div className="max-w-sm border-l border-white/10 pl-5 text-sm leading-6 text-zinc-400 lg:mt-2">
                 Names, customer data, endpoints, screenshots, company identifiers, and proprietary workflow labels are
-                intentionally omitted. The details below focus on architecture, product scope, and engineering
-                complexity.
+                intentionally omitted. The details below describe architecture, product scope, and engineering
+                responsibilities at a non-confidential level.
               </div>
             </div>
 
@@ -452,12 +451,12 @@ const Home = () => {
 
             <div className="mt-8 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
               <div>
-                <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">System shape</div>
+                <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">Project scope</div>
                 <h4 className="mt-2 text-2xl font-semibold text-white">A desktop app with a real backend</h4>
                 <p className="mt-4 leading-7 text-zinc-400">
-                  The app combines local OS affordances with cloud services: Electron handles the desktop shell,
-                  TypeScript and React power the renderer, GraphQL connects the data model, and AWS-backed services
-                  handle auth, files, realtime events, email, and server-side workflows.
+                  The application combines local operating-system capabilities with cloud services. Electron handles
+                  the desktop shell, TypeScript and React power the renderer, GraphQL connects the data model, and
+                  AWS-backed services handle authentication, files, realtime events, email, and server-side workflows.
                 </p>
               </div>
               <div className="grid gap-3">
@@ -479,8 +478,8 @@ const Home = () => {
             </div>
 
             <div className="mt-8">
-              <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">What it shows</div>
-              <h4 className="mt-2 text-2xl font-semibold text-white">Engineering depth across the whole product</h4>
+              <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">Key responsibilities</div>
+              <h4 className="mt-2 text-2xl font-semibold text-white">Representative engineering work</h4>
               <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {privatePlatformHighlights.map(({ title, description, icon: Icon }) => (
                   <article
