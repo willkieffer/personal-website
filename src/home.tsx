@@ -68,16 +68,16 @@ const technologies = [
   'Sentry',
 ]
 
-const proofPoints = [
-  { value: 'NYC', label: 'Based in New York' },
-  { value: 'Columbia CS', label: 'Computer Science' },
-  { value: 'Founder-builder', label: 'Shipping product work' },
+const profileSummary = [
+  { value: 'Product engineering', label: 'Building full-stack apps from UI to backend' },
+  { value: 'Desktop, web, mobile', label: 'React, TypeScript, Electron, Flutter, and AWS' },
+  { value: 'Workflow tools', label: 'Focused on practical software for complex operations' },
 ]
 
 const privatePlatformSnapshot = [
   { value: 'Hybrid application', label: 'Electron client with a GraphQL API and AWS-backed services' },
-  { value: 'Operational scope', label: 'Projects, quoting, files, email, tasks, analytics, and administration' },
-  { value: 'Production support', label: 'Updates, permissions, observability, documentation, and accessibility settings' },
+  { value: 'Workflow automation', label: 'Quoting, files, email, tasks, analytics, and administration' },
+  { value: 'AI-assisted operations', label: 'Process automation, assistant workflows, and natural-language controls' },
 ]
 
 const privatePlatformHighlights = [
@@ -106,9 +106,9 @@ const privatePlatformHighlights = [
     icon: Database,
   },
   {
-    title: 'Assistant and analytics features',
+    title: 'AI-assisted workflow automation',
     description:
-      'The application includes an in-app assistant, attachment-aware workflows, natural-language table controls, email processing, and analytics dashboards with explicit review and approval steps.',
+      'AI features automate repetitive operational steps, including email processing, attachment-aware workflows, natural-language table controls, guided task creation, and analytics queries with explicit review points.',
     icon: Sparkle,
   },
   {
@@ -346,14 +346,15 @@ const Home = () => {
       <section className="mx-auto grid w-full max-w-7xl gap-10 overflow-hidden px-5 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-8 lg:py-16">
         <div className="hero-copy min-w-0">
           <div className="inline-flex rounded-full border border-emerald-300/25 bg-emerald-300/10 px-3 py-1 text-sm font-medium text-emerald-100">
-            Building useful software with product sense
+            Full-stack software engineer
           </div>
           <h1 className="mt-6 max-w-4xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-            Software engineer focused on polished, practical apps.
+            I build practical apps for complex workflows.
           </h1>
           <p className="mt-5 max-w-2xl break-words text-lg leading-8 text-zinc-300">
-            Hey, I&apos;m William Kieffer. I build full-stack products across desktop, mobile, cloud, and AI workflows,
-            with a bias toward clean interfaces, resilient systems, and software that feels genuinely useful.
+            I&apos;m William Kieffer, a software engineer in New York. I work across React, TypeScript, Electron,
+            GraphQL, AWS, Flutter, and AI-assisted tools, with a focus on automating manual processes and turning
+            complex business workflows into clear, reliable software.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
@@ -370,7 +371,7 @@ const Home = () => {
             </a>
           </div>
           <dl className="mt-9 grid gap-3 sm:grid-cols-3">
-            {proofPoints.map((point) => (
+            {profileSummary.map((point) => (
               <div key={point.value} className="rounded-md border border-white/10 bg-white/[0.035] p-4">
                 <dt className="text-sm text-zinc-500">{point.label}</dt>
                 <dd className="mt-1 font-semibold text-white">{point.value}</dd>
@@ -378,19 +379,22 @@ const Home = () => {
             ))}
           </dl>
         </div>
-        <div className="hero-portrait relative mx-auto flex min-w-0 justify-center lg:justify-end">
-          <div className="absolute inset-x-6 bottom-0 top-10 rounded-md border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]" />
-          <img
-            src={linkedinphoto}
-            title="Headshot"
-            id="headshot"
-            alt="William Kieffer headshot"
-            className="relative aspect-square w-64 rounded-md border border-white/15 object-cover shadow-[0_28px_80px_rgba(0,0,0,0.45)] sm:w-80"
-          />
-          <div className="absolute -bottom-5 left-4 right-4 rounded-md border border-white/10 bg-zinc-950/90 p-4 shadow-2xl backdrop-blur">
-            <div className="text-sm uppercase tracking-[0.18em] text-cyan-200">Currently</div>
+        <div className="hero-portrait mx-auto flex min-w-0 flex-col items-center gap-4 lg:items-end">
+          <div className="relative flex justify-center">
+            <div className="absolute inset-x-6 bottom-0 top-10 rounded-md border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]" />
+            <img
+              src={linkedinphoto}
+              title="Headshot"
+              id="headshot"
+              alt="William Kieffer headshot"
+              className="relative aspect-square w-64 rounded-md border border-white/15 object-cover shadow-[0_28px_80px_rgba(0,0,0,0.45)] sm:w-80"
+            />
+          </div>
+          <div className="w-full max-w-80 rounded-md border border-white/10 bg-zinc-950/90 p-4 shadow-2xl backdrop-blur">
+            <div className="text-sm uppercase tracking-[0.18em] text-cyan-200">Current focus</div>
             <div className="mt-1 text-sm leading-6 text-zinc-300">
-              Developing a private desktop operations platform for complex B2B workflows.
+              A desktop operations platform with quoting, file management, collaboration, reporting, and AI-assisted
+              workflow automation.
             </div>
           </div>
         </div>
@@ -404,8 +408,8 @@ const Home = () => {
               <h2 className="mt-2 text-3xl font-semibold text-white">Products with real users in mind</h2>
             </div>
             <p className="max-w-xl text-sm leading-6 text-zinc-400">
-              A mix of private production software, startup work, mobile app development, cloud architecture, and fast
-              iteration on user-facing product experiences.
+              A mix of production software, startup work, mobile app development, cloud architecture, and AI-assisted
+              workflow automation.
             </p>
           </div>
 
@@ -414,13 +418,13 @@ const Home = () => {
             className="mt-8 scroll-mt-28 border-y border-cyan-300/20 py-8"
           >
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-              <div className="max-w-3xl">
+              <div className="max-w-4xl">
                 <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1 text-sm font-medium text-cyan-100">
-                  <Lock size={15} weight="duotone" aria-hidden />
-                  Confidential production platform
+                  <Desktop size={15} weight="duotone" aria-hidden />
+                  Production operations platform
                 </div>
                 <h3 className="mt-5 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-                  Private ERP/CRM desktop platform
+                  ERP/CRM desktop platform
                 </h3>
                 <p className="mt-5 text-lg leading-8 text-zinc-300">
                   A production Electron application for a specialized B2B operations team, developed to consolidate
@@ -428,15 +432,9 @@ const Home = () => {
                   analytics, and administration in one desktop-first system.
                 </p>
                 <p className="mt-4 leading-7 text-zinc-400">
-                  The case study is focused on product and systems complexity rather than public branding. The
-                  application combines cloud data, local desktop behavior, document workflows, permissions, release
-                  management, and daily operational tasks within a cohesive interface.
+                  The platform combines cloud data, local desktop behavior, document workflows, permissions, release
+                  management, and AI-assisted automation for repetitive operational tasks.
                 </p>
-              </div>
-              <div className="max-w-sm border-l border-white/10 pl-5 text-sm leading-6 text-zinc-400 lg:mt-2">
-                Names, customer data, endpoints, screenshots, company identifiers, and proprietary workflow labels are
-                intentionally omitted. The details below describe architecture, product scope, and engineering
-                responsibilities at a non-confidential level.
               </div>
             </div>
 
