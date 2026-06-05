@@ -1,11 +1,27 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import linkedinphoto from './assets/linkedinphoto.png'
 import pulseLogo from './assets/pulseLogo.png'
 import verdeLogo from './assets/verdeLogo.png'
 import appleAppStore from './assets/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg'
 import ReactMarkdown from 'react-markdown'
 import Masonry from '@mui/lab/Masonry'
-import { Archive, ArrowSquareOut, GitBranch, Lock, X } from '@phosphor-icons/react'
+import {
+  Archive,
+  ArrowSquareOut,
+  CloudArrowUp,
+  Database,
+  Desktop,
+  FileText,
+  Folders,
+  GitBranch,
+  Lock,
+  ShieldCheck,
+  Sparkle,
+  TerminalWindow,
+  UsersThree,
+  X,
+} from '@phosphor-icons/react'
 
 type Project = {
   id: number
@@ -28,18 +44,100 @@ const PULSE_SITE_URL = 'https://pulse.williamkieffer.works/'
 const VERDE_SITE_URL = 'https://www.verdefinancialapp.com'
 
 const technologies = [
+  'TypeScript',
+  'React',
+  'Electron',
+  'Chakra UI',
   'Flutter',
+  'Apollo GraphQL',
   'AWS Amplify',
   'AWS AppSync',
+  'AWS S3',
   'AWS DynamoDB',
   'AWS Cognito',
   'AWS Lambda',
   'GraphQL',
+  'Serverless',
+  'Native Windows APIs',
+  'PDF/Excel generation',
   'OpenAI',
   'Google Cloud Platform',
   'Sign in with Apple',
   'Push Notifications',
   'Microsoft Graph',
+  'Sentry',
+]
+
+const proofPoints = [
+  { value: 'NYC', label: 'Based in New York' },
+  { value: 'Columbia CS', label: 'Computer Science' },
+  { value: 'Founder-builder', label: 'Shipping product work' },
+]
+
+const privatePlatformSnapshot = [
+  { value: 'Desktop + cloud', label: 'Electron app, GraphQL API, and AWS-backed services' },
+  { value: 'Workflow depth', label: 'Projects, quoting, files, email, tasks, analytics, and admin tools' },
+  { value: 'Production polish', label: 'Updates, permissions, observability, docs, and accessibility settings' },
+]
+
+const privatePlatformHighlights = [
+  {
+    title: 'Desktop-grade file workspace',
+    description:
+      'Built a project file explorer with multi-select, server-side move/copy flows, signed URL access, active file presence, and Windows drag-and-drop behavior that feels native instead of web-adjacent.',
+    icon: Folders,
+  },
+  {
+    title: 'Quote and proposal engine',
+    description:
+      'Designed spreadsheet-like editors for dense line-item work: keyboard navigation, bulk editing, import helpers, approval states, finalization, exports, and generated PDF/Excel documents.',
+    icon: FileText,
+  },
+  {
+    title: 'Realtime collaboration layer',
+    description:
+      'Added WebSocket-backed editing, version locks, change review flows, project chat, notifications, and cross-window clipboard state so multiple people can work without stepping on each other.',
+    icon: UsersThree,
+  },
+  {
+    title: 'Full-stack data system',
+    description:
+      'Maintained a typed GraphQL surface with generated clients, resolvers, migrations, authorization rules, search/filter metadata, and backend utilities that keep complex business records coherent.',
+    icon: Database,
+  },
+  {
+    title: 'AI and analytics surfaces',
+    description:
+      'Integrated an in-app assistant, attachment-aware workflows, natural-language table controls, email processing, and analytics dashboards while keeping review and approval moments explicit.',
+    icon: Sparkle,
+  },
+  {
+    title: 'Operational hardening',
+    description:
+      'Handled client version gating, automatic update states, Sentry reporting, release packaging, native module rebuilds, and settings for text size and zoom in a Windows desktop shell.',
+    icon: ShieldCheck,
+  },
+]
+
+const privatePlatformArchitecture = [
+  {
+    title: 'Electron shell',
+    description:
+      'Main, preload, and renderer layers coordinate secure IPC, custom window chrome, local file access, document generation, and native Windows integrations.',
+    icon: Desktop,
+  },
+  {
+    title: 'Typed product UI',
+    description:
+      'React, Chakra UI, Apollo, generated GraphQL types, saved table state, keyboard shortcuts, and dense workflows tuned for daily operational use.',
+    icon: TerminalWindow,
+  },
+  {
+    title: 'Cloud services',
+    description:
+      'Serverless GraphQL, WebSocket handlers, auth, S3-backed files, migrations, email workflows, and infrastructure code support the desktop experience.',
+    icon: CloudArrowUp,
+  },
 ]
 
 const isAbortError = (error: unknown) => error instanceof DOMException && error.name === 'AbortError'
@@ -125,32 +223,61 @@ const Home = () => {
   const contributedProjects = projects.filter((project) => project.owner.login !== 'willkieffer').sort(sortByUpdated)
 
   const renderProjectCard = (project: Project) => {
-    const hasFlags = project.archived || project.private || project.fork
+    const flags = [
+      project.archived ? { label: 'Archived', icon: Archive } : null,
+      project.private ? { label: 'Private', icon: Lock } : null,
+      project.fork ? { label: 'Fork', icon: GitBranch } : null,
+    ].filter(Boolean) as { label: string; icon: typeof Archive }[]
 
     return (
-      <div key={project.id} className="flex flex-col">
-        {hasFlags ? (
-          <div className="mx-4 flex w-min gap-2 rounded-t-lg bg-gray-600 p-2" aria-label="Project flags">
-            {project.archived ? <Archive weight="duotone" aria-label="Archived" /> : null}
-            {project.private ? <Lock weight="duotone" aria-label="Private" /> : null}
-            {project.fork ? <GitBranch weight="duotone" aria-label="Fork" /> : null}
+      <article
+        key={project.id}
+        className="group flex h-full flex-col rounded-md border border-white/10 bg-zinc-950/50 p-4 shadow-[0_18px_45px_rgba(0,0,0,0.22)] transition-colors hover:border-cyan-300/35 hover:bg-zinc-900/80"
+      >
+        <div className="flex items-start justify-between gap-3">
+          <button
+            type="button"
+            disabled={project.private}
+            className="min-w-0 flex-1 select-none text-left disabled:cursor-not-allowed disabled:opacity-70"
+            onClick={() => setActiveProject(project.private ? null : project)}
+          >
+            <div className="break-words text-base font-semibold text-white transition-colors group-hover:text-cyan-100">
+              {project.name}
+            </div>
+            {!project.archived ? (
+              <div className="mt-1 text-xs uppercase tracking-[0.18em] text-zinc-500">
+                Updated {new Date(project.updated_at).toLocaleDateString()}
+              </div>
+            ) : null}
+          </button>
+          {!project.private ? (
+            <a
+              href={project.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-white/10 text-zinc-400 transition-colors hover:border-cyan-300/50 hover:text-cyan-100"
+              aria-label={`Open ${project.name} on GitHub`}
+              title="Open on GitHub"
+            >
+              <ArrowSquareOut size={18} aria-hidden />
+            </a>
+          ) : null}
+        </div>
+        <p className="mt-3 text-sm leading-6 text-zinc-300">{project.description ?? 'No description provided'}</p>
+        {flags.length > 0 ? (
+          <div className="mt-4 flex flex-wrap gap-2" aria-label="Project flags">
+            {flags.map(({ label, icon: Icon }) => (
+              <span
+                key={label}
+                className="inline-flex items-center gap-1 rounded-full border border-amber-300/20 bg-amber-300/10 px-2.5 py-1 text-xs text-amber-100"
+              >
+                <Icon size={14} weight="duotone" aria-hidden />
+                {label}
+              </span>
+            ))}
           </div>
         ) : null}
-        <button
-          type="button"
-          disabled={project.private}
-          className={`relative flex w-full select-none flex-col rounded-md p-3 text-left transition-colors hover:bg-gray-600 disabled:cursor-not-allowed disabled:opacity-70 ${
-            project.archived ? 'bg-gray-600' : 'bg-gray-700'
-          }`}
-          onClick={() => setActiveProject(project.private ? null : project)}
-        >
-          <div className="text-lg">{project.name}</div>
-          {!project.archived ? (
-            <div className="text-sm">Updated {new Date(project.updated_at).toDateString()}</div>
-          ) : null}
-          <div className="pt-2">{project.description ?? 'No description provided'}</div>
-        </button>
-      </div>
+      </article>
     )
   }
 
@@ -160,154 +287,361 @@ const Home = () => {
         <>
           <div
             onClick={() => setActiveProject(null)}
-            className="fixed left-0 top-0 z-40 h-screen w-screen bg-black opacity-50"
+            className="fixed left-0 top-0 z-40 h-screen w-screen bg-black/70 backdrop-blur-sm"
             aria-hidden
           />
           <section
             role="dialog"
             aria-modal="true"
             aria-labelledby="project-dialog-title"
-            className="fixed left-1/2 top-1/2 z-50 max-h-[80vh] w-[90vw] max-w-3xl overflow-y-auto rounded-lg border-2 border-black bg-gray-900 p-4 shadow-2xl"
+            className="fixed left-1/2 top-1/2 z-50 max-h-[82vh] w-[92vw] max-w-3xl overflow-y-auto rounded-md border border-white/10 bg-zinc-950 p-5 shadow-2xl"
             style={{ transform: 'translate(-50%, -50%)' }}
           >
             <button
               type="button"
               onClick={() => setActiveProject(null)}
-              className="absolute right-3 top-3 rounded-full bg-gray-700 p-2"
+              className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-md border border-white/10 bg-white/[0.04] text-zinc-300 transition-colors hover:text-white"
               aria-label="Close project details"
             >
-              <X size={20} aria-hidden />
+              <X size={18} aria-hidden />
             </button>
-            <div className="flex flex-col gap-3 pr-10">
-              <div id="project-dialog-title" className="text-lg">
+            <div className="flex flex-col gap-4 pr-10">
+              <div id="project-dialog-title" className="text-2xl font-semibold text-white">
                 {activeProject.name}
               </div>
               {activeProject.archived ? (
-                <div className="flex w-min justify-center rounded-full bg-gray-600 px-4 py-2">Archived</div>
+                <div className="w-fit rounded-full border border-amber-300/20 bg-amber-300/10 px-3 py-1 text-sm text-amber-100">
+                  Archived
+                </div>
               ) : (
-                <div>Last active: {new Date(activeProject.updated_at).toDateString()}</div>
+                <div className="text-sm uppercase tracking-[0.18em] text-zinc-500">
+                  Last active {new Date(activeProject.updated_at).toLocaleDateString()}
+                </div>
               )}
-              <div className="italic">{activeProject.description ?? 'No description provided'}</div>
+              <p className="text-zinc-300">{activeProject.description ?? 'No description provided'}</p>
               <a
                 href={activeProject.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-lg bg-gray-700 p-2"
+                className="inline-flex w-fit items-center justify-center gap-2 rounded-md border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-sm font-medium text-cyan-100 transition-colors hover:bg-cyan-300/15"
               >
                 View project on GitHub
                 <ArrowSquareOut size={18} aria-hidden />
               </a>
               {readmeLoading ? (
-                <div className="italic">Loading README...</div>
+                <div className="text-zinc-400">Loading README...</div>
               ) : markdownFile ? (
-                <>
-                  <div className="text-lg">README.md</div>
+                <div className="markdown-body">
+                  <div className="mb-3 text-sm uppercase tracking-[0.18em] text-zinc-500">README.md</div>
                   <ReactMarkdown>{markdownFile}</ReactMarkdown>
-                </>
+                </div>
               ) : (
-                <div className="italic">Could not locate README</div>
+                <div className="text-zinc-400">Could not locate README</div>
               )}
             </div>
           </section>
         </>
       ) : null}
-      <div className="flex flex-col items-center justify-center gap-4 p-6 sm:flex-row">
-        <img
-          src={linkedinphoto}
-          title="Headshot"
-          id="headshot"
-          alt="William Kieffer headshot"
-          width={150}
-          height={150}
-        />
-        <div className="max-w-screen-md text-center">
-          Hey! I'm William Kieffer, a software engineer based in NYC. I graduated from Columbia University with a
-          Bachelor's degree in Computer Science, and I'm spending my time both searching for a job and working on Verde
-          Financial&mdash;a personal finance startup designed to simplify budgeting and debt management. This website
-          showcases my resume, links to my social accounts, and some of the other projects that I've been working on in
-          my free time. Feel free to drop me an email with any questions or comments, or just to say hello!
-        </div>
-      </div>
-      <a href={VERDE_SITE_URL} target="_blank" rel="noopener noreferrer" className="block">
-        <div className="flex items-center justify-center gap-4 bg-[#50a464] p-4 text-center text-2xl">
-          <img src={verdeLogo} alt="Verde Financial logo" width={75} />
-          <div>Learn More about Verde Financial</div>
-        </div>
-      </a>
-      <div className="p-4 text-center text-2xl">Personal Project Spotlight</div>
-      <div className="flex flex-col items-center justify-around gap-4 bg-[#fde6ca] p-4 text-center text-2xl text-black md:flex-row">
-        <div className="flex max-w-sm flex-col items-center justify-center gap-1 rounded-lg p-4">
-          <img
-            src={pulseLogo}
-            title="MealPrepLogo"
-            id="MealPrepLogo"
-            alt="Pulse Health Assistant logo"
-            width={75}
-            height={75}
-          />
-          <div>Pulse Health Assistant</div>
-          <div className="text-lg">Build a plan to reach your health goals.</div>
-        </div>
-        <div className="flex flex-col items-center justify-center gap-2">
-          <a
-            href={PULSE_APP_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="m-1"
-            aria-label="Download Pulse Health Assistant on the App Store"
-          >
-            <img
-              src={appleAppStore}
-              title="Apple App Store"
-              id="Apple App Store"
-              alt="Download on the App Store"
-              width={150}
-            />
-          </a>
-          <div className="text-sm">(Coming soon to Android)</div>
-          <a
-            href={PULSE_SITE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-lg underline underline-offset-2"
-          >
-            Learn More
-          </a>
-        </div>
-      </div>
-      <div className="p-4 text-center text-lg">Technologies</div>
-      <div className="flex flex-wrap justify-center gap-3 px-4">
-        {technologies.map((tech) => (
-          <div key={tech} className="rounded-full bg-gray-700 px-4 py-2">
-            {tech}
+
+      <section className="mx-auto grid w-full max-w-7xl gap-10 overflow-hidden px-5 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-8 lg:py-16">
+        <div className="hero-copy min-w-0">
+          <div className="inline-flex rounded-full border border-emerald-300/25 bg-emerald-300/10 px-3 py-1 text-sm font-medium text-emerald-100">
+            Building useful software with product sense
           </div>
-        ))}
-      </div>
-      <div className="m-8 border" />
-      <div className="flex flex-col items-center justify-center">
+          <h1 className="mt-6 max-w-4xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
+            Software engineer focused on polished, practical apps.
+          </h1>
+          <p className="mt-5 max-w-2xl break-words text-lg leading-8 text-zinc-300">
+            Hey, I&apos;m William Kieffer. I build full-stack products across desktop, mobile, cloud, and AI workflows,
+            with a bias toward clean interfaces, resilient systems, and software that feels genuinely useful.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Link
+              to="/resume"
+              className="inline-flex items-center justify-center rounded-md bg-white px-4 py-2.5 text-sm font-semibold text-zinc-950 transition-colors hover:bg-cyan-100"
+            >
+              View resume
+            </Link>
+            <a
+              href="#private-platform-case-study"
+              className="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:border-cyan-300/50 hover:text-cyan-100"
+            >
+              Read featured case study
+            </a>
+          </div>
+          <dl className="mt-9 grid gap-3 sm:grid-cols-3">
+            {proofPoints.map((point) => (
+              <div key={point.value} className="rounded-md border border-white/10 bg-white/[0.035] p-4">
+                <dt className="text-sm text-zinc-500">{point.label}</dt>
+                <dd className="mt-1 font-semibold text-white">{point.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div className="hero-portrait relative mx-auto flex min-w-0 justify-center lg:justify-end">
+          <div className="absolute inset-x-6 bottom-0 top-10 rounded-md border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]" />
+          <img
+            src={linkedinphoto}
+            title="Headshot"
+            id="headshot"
+            alt="William Kieffer headshot"
+            className="relative aspect-square w-64 rounded-md border border-white/15 object-cover shadow-[0_28px_80px_rgba(0,0,0,0.45)] sm:w-80"
+          />
+          <div className="absolute -bottom-5 left-4 right-4 rounded-md border border-white/10 bg-zinc-950/90 p-4 shadow-2xl backdrop-blur">
+            <div className="text-sm uppercase tracking-[0.18em] text-cyan-200">Currently</div>
+            <div className="mt-1 text-sm leading-6 text-zinc-300">
+              Building a private desktop operations platform that turns messy business workflows into reliable,
+              everyday software.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-white/10 bg-white/[0.025]">
+        <div className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">Selected work</div>
+              <h2 className="mt-2 text-3xl font-semibold text-white">Products with real users in mind</h2>
+            </div>
+            <p className="max-w-xl text-sm leading-6 text-zinc-400">
+              A mix of private production software, startup work, mobile app development, cloud architecture, and fast
+              iteration on user-facing product experiences.
+            </p>
+          </div>
+
+          <div
+            id="private-platform-case-study"
+            className="mt-8 scroll-mt-28 border-y border-cyan-300/20 py-8"
+          >
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+              <div className="max-w-3xl">
+                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1 text-sm font-medium text-cyan-100">
+                  <Lock size={15} weight="duotone" aria-hidden />
+                  Confidential flagship project
+                </div>
+                <h3 className="mt-5 text-3xl font-semibold leading-tight text-white sm:text-4xl">
+                  Private ERP/CRM desktop platform
+                </h3>
+                <p className="mt-5 text-lg leading-8 text-zinc-300">
+                  A production Electron application for a specialized B2B operations team. I built it to replace
+                  fragile spreadsheet-and-email workflows with a desktop-first system for projects, quote generation,
+                  files, task management, internal communication, analytics, and administration.
+                </p>
+                <p className="mt-4 leading-7 text-zinc-400">
+                  The interesting part is the product density: it is not a single-feature demo. It is a full operating
+                  surface where cloud data, local desktop behavior, documents, permissions, updates, and daily user
+                  workflows all have to cooperate without making the interface feel heavy.
+                </p>
+              </div>
+              <div className="max-w-sm border-l border-white/10 pl-5 text-sm leading-6 text-zinc-400 lg:mt-2">
+                Names, customer data, endpoints, screenshots, company identifiers, and proprietary workflow labels are
+                intentionally omitted. The details below focus on architecture, product scope, and engineering
+                complexity.
+              </div>
+            </div>
+
+            <dl className="mt-7 grid gap-3 lg:grid-cols-3">
+              {privatePlatformSnapshot.map((item) => (
+                <div key={item.value} className="rounded-md border border-white/10 bg-white/[0.035] p-4">
+                  <dt className="text-sm text-zinc-500">{item.label}</dt>
+                  <dd className="mt-2 text-lg font-semibold text-white">{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <div className="mt-8 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+              <div>
+                <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">System shape</div>
+                <h4 className="mt-2 text-2xl font-semibold text-white">A desktop app with a real backend</h4>
+                <p className="mt-4 leading-7 text-zinc-400">
+                  The app combines local OS affordances with cloud services: Electron handles the desktop shell,
+                  TypeScript and React power the renderer, GraphQL connects the data model, and AWS-backed services
+                  handle auth, files, realtime events, email, and server-side workflows.
+                </p>
+              </div>
+              <div className="grid gap-3">
+                {privatePlatformArchitecture.map(({ title, description, icon: Icon }) => (
+                  <article
+                    key={title}
+                    className="grid gap-3 rounded-md border border-white/10 bg-zinc-950/45 p-4 sm:grid-cols-[auto_1fr]"
+                  >
+                    <span className="grid h-11 w-11 place-items-center rounded-md border border-cyan-300/20 bg-cyan-300/10 text-cyan-100">
+                      <Icon size={22} weight="duotone" aria-hidden />
+                    </span>
+                    <div>
+                      <h5 className="text-base font-semibold text-white">{title}</h5>
+                      <p className="mt-1 text-sm leading-6 text-zinc-400">{description}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8">
+              <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">What it shows</div>
+              <h4 className="mt-2 text-2xl font-semibold text-white">Engineering depth across the whole product</h4>
+              <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {privatePlatformHighlights.map(({ title, description, icon: Icon }) => (
+                  <article
+                    key={title}
+                    className="rounded-md border border-white/10 bg-white/[0.035] p-4 transition-colors hover:border-cyan-300/35"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-white/10 bg-white/[0.05] text-cyan-100">
+                        <Icon size={21} weight="duotone" aria-hidden />
+                      </span>
+                      <h5 className="text-base font-semibold text-white">{title}</h5>
+                    </div>
+                    <p className="mt-3 text-sm leading-6 text-zinc-400">{description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 grid gap-4 lg:grid-cols-2">
+            <a
+              href={VERDE_SITE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group rounded-md border border-emerald-300/20 bg-emerald-300/[0.06] p-5 transition-colors hover:border-emerald-200/50"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <span className="grid h-16 w-16 shrink-0 place-items-center rounded-md bg-white p-2">
+                    <img src={verdeLogo} alt="Verde Financial logo" className="max-h-12 object-contain" />
+                  </span>
+                  <div>
+                    <div className="text-sm uppercase tracking-[0.18em] text-emerald-100">Startup build</div>
+                    <div className="mt-1 text-2xl font-semibold text-white">Verde Financial</div>
+                  </div>
+                </div>
+                <ArrowSquareOut
+                  size={22}
+                  className="shrink-0 text-emerald-100 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  aria-hidden
+                />
+              </div>
+              <p className="mt-5 leading-7 text-zinc-300">
+                A personal finance startup designed to simplify budgeting and debt management through focused product
+                design and practical automation.
+              </p>
+            </a>
+            <div className="rounded-md border border-amber-200/20 bg-amber-100/[0.06] p-5">
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-center gap-4">
+                  <span className="grid h-16 w-16 shrink-0 place-items-center rounded-md bg-white p-2">
+                    <img
+                      src={pulseLogo}
+                      title="Pulse Health Assistant logo"
+                      id="MealPrepLogo"
+                      alt="Pulse Health Assistant logo"
+                      className="max-h-12 object-contain"
+                    />
+                  </span>
+                  <div>
+                    <div className="text-sm uppercase tracking-[0.18em] text-amber-100">Mobile app</div>
+                    <div className="mt-1 text-2xl font-semibold text-white">Pulse Health Assistant</div>
+                  </div>
+                </div>
+                <a
+                  href={PULSE_APP_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-fit"
+                  aria-label="Download Pulse Health Assistant on the App Store"
+                >
+                  <img
+                    src={appleAppStore}
+                    title="Apple App Store"
+                    id="Apple App Store"
+                    alt="Download on the App Store"
+                    width={150}
+                  />
+                </a>
+              </div>
+              <p className="mt-5 leading-7 text-zinc-300">Build a plan to reach your health goals.</p>
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <span className="text-sm text-zinc-500">Coming soon to Android</span>
+                <a
+                  href={PULSE_SITE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-amber-100 underline underline-offset-4"
+                >
+                  Learn more
+                  <ArrowSquareOut size={15} aria-hidden />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div>
+            <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">Stack</div>
+            <h2 className="mt-2 text-3xl font-semibold text-white">Tools I reach for</h2>
+            <p className="mt-4 leading-7 text-zinc-400">
+              Comfortable across product surfaces and backend services, especially where desktop UX, data, APIs,
+              documents, and mobile experiences meet.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2.5">
+            {technologies.map((tech) => (
+              <span
+                key={tech}
+                className="rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-sm text-zinc-200"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-5 pb-12 lg:px-8">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">GitHub</div>
+            <h2 className="mt-2 text-3xl font-semibold text-white">Recent public projects</h2>
+          </div>
+          <div className="text-sm text-zinc-500">
+            {projectsLoading
+              ? 'Syncing from GitHub'
+              : projectsError
+                ? 'GitHub unavailable'
+                : `${ownedProjects.length} owned public repos`}
+          </div>
+        </div>
         {projectsLoading ? (
-          <div className="p-4 text-center">Loading projects from GitHub...</div>
+          <div className="rounded-md border border-white/10 bg-white/[0.035] p-5 text-zinc-300">
+            Loading projects from GitHub...
+          </div>
         ) : projectsError ? (
-          <div className="p-4 text-center">{projectsError}</div>
+          <div className="rounded-md border border-red-300/20 bg-red-500/10 p-5 text-red-100">{projectsError}</div>
         ) : projects.length > 0 ? (
           <>
-            <div className="p-4 text-center text-lg">My Current Projects (from GitHub)</div>
-            <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={2} sx={{ pl: 2, pr: 2, width: '100%' }}>
+            <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={2} sx={{ m: 0, width: '100%' }}>
               {ownedProjects.map(renderProjectCard)}
             </Masonry>
             {contributedProjects.length > 0 ? (
-              <>
-                <div className="p-4 text-center text-lg">Other Projects I've Contributed To</div>
-                <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={2} sx={{ pl: 2, pr: 2, width: '100%' }}>
+              <div className="mt-10">
+                <h3 className="mb-4 text-xl font-semibold text-white">Other projects I have contributed to</h3>
+                <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={2} sx={{ m: 0, width: '100%' }}>
                   {contributedProjects.map(renderProjectCard)}
                 </Masonry>
-              </>
+              </div>
             ) : null}
           </>
         ) : (
-          <div className="p-4 text-center">No public projects found.</div>
+          <div className="rounded-md border border-white/10 bg-white/[0.035] p-5 text-zinc-300">
+            No public projects found.
+          </div>
         )}
-      </div>
+      </section>
     </>
   )
 }
