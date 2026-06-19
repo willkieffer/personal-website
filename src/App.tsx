@@ -72,12 +72,14 @@ const Root = () => {
       <header className="sticky top-0 z-30 border-b border-white/10 bg-[#101113]/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-4 sm:flex-row sm:items-center sm:justify-between lg:px-8">
           <Link to="/" className="group flex w-fit items-center gap-3 no-underline" aria-label="William Kieffer home">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md border border-white/15 bg-white text-base font-semibold text-zinc-950 shadow-[0_14px_40px_rgba(0,0,0,0.3)] transition-transform group-hover:-translate-y-0.5">
-              WK
-            </span>
+            <img
+              src="/favicon.png"
+              alt=""
+              className="h-11 w-11 shrink-0 rounded-md object-cover shadow-[0_14px_40px_rgba(0,0,0,0.3)] transition-transform group-hover:-translate-y-0.5"
+            />
             <span className="flex flex-col">
               <span className="text-xl font-semibold tracking-normal text-white sm:text-2xl">William Kieffer</span>
-              <span className="text-sm text-zinc-400">Software engineer in NYC</span>
+              <span className="text-sm text-zinc-400">CTO, Expressive Lighting</span>
             </span>
           </Link>
           <div className="flex items-center gap-2">
@@ -142,7 +144,7 @@ const Root = () => {
         <Outlet />
       </main>
       <footer className="mx-auto max-w-7xl px-5 py-10 text-sm text-zinc-500 lg:px-8">
-        <div className="border-t border-white/10 pt-6">Last updated March 2025</div>
+        <div className="border-t border-white/10 pt-6">Last updated June 2026</div>
       </footer>
     </div>
   )

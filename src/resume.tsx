@@ -36,8 +36,8 @@ const Resume = () => {
   }, [])
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="p-4 text-center">
+    <section className="mx-auto w-full max-w-7xl px-5 py-8 lg:px-8">
+      <div className="rounded-md border border-white/10 bg-white/[0.035] p-4 text-center text-sm text-zinc-300">
         PDF not rendering?{' '}
         <a
           href={resume ?? RESUME_URL}
@@ -50,13 +50,21 @@ const Resume = () => {
         </a>
       </div>
       {error ? (
-        <div className="p-4 text-center">{error}</div>
+        <div className="mt-4 rounded-md border border-red-300/20 bg-red-500/10 p-4 text-center text-red-100">
+          {error}
+        </div>
       ) : resume ? (
-        <iframe src={resume} width="100%" height="800" title="William Kieffer resume PDF" />
+        <iframe
+          src={resume}
+          className="mt-5 h-[800px] w-full rounded-md border border-white/10 bg-white"
+          title="William Kieffer resume PDF"
+        />
       ) : (
-        <div className="p-8 text-center">Loading resume...</div>
+        <div className="mt-4 rounded-md border border-white/10 bg-white/[0.035] p-8 text-center text-zinc-300">
+          Loading resume...
+        </div>
       )}
-    </div>
+    </section>
   )
 }
 

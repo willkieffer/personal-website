@@ -4,16 +4,16 @@ import googleMaps from './assets/google-maps-logo-4-1.png'
 
 const Personal = () => {
   return (
-    <div className="flex flex-col gap-4 p-4">
-      <div className="p-4">
-        <div>
+    <section className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-10 lg:px-8">
+      <div>
+        <div className="max-w-3xl text-zinc-300">
           I use this page as a kind of mood board&mdash;it's got some of what I'm up to and what's on my to-do list.
         </div>
-        <div className="my-6 border" />
+        <div className="mt-6 border-t border-white/10" />
       </div>
       <div className="flex flex-wrap items-center justify-center gap-8">
         <a href="https://www.thetrevorproject.org/" target="_blank" rel="noopener noreferrer" className="no-underline">
-          <div className="flex max-w-96 flex-col items-center justify-center rounded-lg border-2 border-orange-600 p-4">
+          <div className="flex max-w-96 flex-col items-center justify-center rounded-md border border-orange-300/40 bg-white/[0.035] p-4">
             <img src={trevor} alt="The Trevor Project logo" className="max-w-64 object-contain" />
             <div>
               The Trevor Project is a leading suicide prevention and crisis intervention nonprofit organization for
@@ -22,8 +22,8 @@ const Personal = () => {
           </div>
         </a>
         <a href="https://www.newyorkcares.org/" target="_blank" rel="noopener noreferrer" className="no-underline">
-          <div className="flex max-w-96 flex-col items-center justify-center rounded-lg border-2 border-red-600 p-4">
-            <div className="mb-3 rounded-lg bg-white p-2">
+          <div className="flex max-w-96 flex-col items-center justify-center rounded-md border border-red-300/40 bg-white/[0.035] p-4">
+            <div className="mb-3 rounded-md bg-white p-2">
               <img src={nycares} alt="New York Cares logo" className="max-w-64 object-contain" />
             </div>
             <div>
@@ -35,7 +35,7 @@ const Personal = () => {
       </div>
       <div className="mt-8 text-center text-xl">Empire State Trail Bike Path</div>
       <iframe
-        className="rounded-lg"
+        className="rounded-md border border-white/10"
         src="https://www.google.com/maps/d/u/0/embed?mid=1oUux_du-VEvSwa-UspgJlHtLg6iCiNc&ehbc=2E312F"
         width="100%"
         height="480"
@@ -44,7 +44,7 @@ const Personal = () => {
       />
       <div className="mt-8 text-center text-xl">US National Parks Bucket List</div>
       <iframe
-        className="rounded-lg"
+        className="rounded-md border border-white/10"
         src="https://www.google.com/maps/d/u/0/embed?mid=1FT1dHt-LiJSoiXZW8l0M4XRKVF0oZDU&ehbc=2E312F"
         width="100%"
         height="480"
@@ -69,7 +69,7 @@ const Personal = () => {
         rel="noopener noreferrer"
         className="no-underline"
       >
-        <div className="flex items-center justify-center gap-6 rounded-lg border-2 border-blue-700 p-6">
+        <div className="flex items-center justify-center gap-6 rounded-md border border-blue-300/40 bg-white/[0.035] p-6">
           <img src={googleMaps} alt="Google Maps logo" className="max-h-12 object-contain" />
           <div className="text-center">
             A Google Maps list of my favorite restaurants in NYC <br /> (recommendations always welcome!)
@@ -91,7 +91,7 @@ const Personal = () => {
       </div>
       <div className="flex flex-wrap justify-around gap-4">
         <iframe
-          className="w-full max-w-[400px] rounded-xl"
+          className="w-full max-w-[400px] rounded-md"
           src="https://open.spotify.com/embed/playlist/37i9dQZF1EIUCQjiEWWFBf?utm_source=generator"
           height="400"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -99,7 +99,7 @@ const Personal = () => {
           title="Para for Cuva Spotify playlist"
         />
         <iframe
-          className="w-full max-w-[400px] rounded-xl"
+          className="w-full max-w-[400px] rounded-md"
           src="https://open.spotify.com/embed/playlist/4rZ9QX3JGHVpQx47LvUgfL?utm_source=generator"
           height="400"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -107,7 +107,7 @@ const Personal = () => {
           title="Daily Solution 6 Spotify playlist"
         />
       </div>
-    </div>
+    </section>
   )
 }
 

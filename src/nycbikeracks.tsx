@@ -113,8 +113,8 @@ const BikeRackLocator = () => {
   }, [requestLocation])
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="w-full p-8">
+    <section className="mx-auto w-full max-w-7xl px-5 py-10 lg:px-8">
+      <div className="w-full">
         <div>
           Simple webapp for me to find the nearest bike rack in the five boroughs using{' '}
           <a
@@ -127,7 +127,7 @@ const BikeRackLocator = () => {
           </a>
           .
         </div>
-        <div className="my-6 border" />
+        <div className="my-6 border-t border-white/10" />
         <div className="pb-6 text-2xl">Nearest Bike Racks</div>
         <div className="flex items-end justify-between gap-4">
           <div className="text-lg">
@@ -229,7 +229,7 @@ const BikeRackLocator = () => {
           </a>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

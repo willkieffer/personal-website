@@ -9,6 +9,8 @@ import Masonry from '@mui/lab/Masonry'
 import {
   Archive,
   ArrowSquareOut,
+  Briefcase,
+  ChartLineUp,
   CloudArrowUp,
   Database,
   Desktop,
@@ -42,100 +44,125 @@ const GITHUB_REPOS_URL = 'https://api.github.com/users/willkieffer/repos?per_pag
 const PULSE_APP_STORE_URL = 'https://apps.apple.com/us/app/pulse-health-assistant/id6670768611'
 const PULSE_SITE_URL = 'https://pulse.williamkieffer.works/'
 const VERDE_SITE_URL = 'https://www.verdefinancialapp.com'
+const VERDE_WEB_APP_URL = 'https://app.verde.williamkieffer.works'
 
-const technologies = [
+const capabilitiesAndStack = [
+  'Technology leadership',
+  'Workflow analysis',
+  'Product strategy',
   'TypeScript',
   'React',
   'Electron',
-  'Chakra UI',
-  'Flutter',
-  'Apollo GraphQL',
-  'AWS Amplify',
-  'AWS AppSync',
-  'AWS S3',
-  'AWS DynamoDB',
-  'AWS Cognito',
-  'AWS Lambda',
   'GraphQL',
+  'Apollo',
+  'AWS',
   'Serverless',
-  'Native Windows APIs',
+  'DynamoDB',
+  'S3',
+  'Cognito',
+  'Lambda',
   'PDF/Excel generation',
+  'Native Windows APIs',
   'OpenAI',
-  'Google Cloud Platform',
-  'Sign in with Apple',
-  'Push Notifications',
   'Microsoft Graph',
   'Sentry',
 ]
 
 const profileSummary = [
-  { value: 'Product engineering', label: 'Building full-stack apps from UI to backend' },
-  { value: 'Desktop, web, mobile', label: 'React, TypeScript, Electron, Flutter, and AWS' },
-  { value: 'Workflow tools', label: 'Focused on practical software for complex operations' },
+  { value: 'CTO', label: 'Expressive Lighting' },
+  { value: 'Internal tools', label: 'Quoting, projects, files, and reporting' },
+  { value: 'Workflow automation', label: 'Software for clearer operations' },
 ]
 
-const privatePlatformSnapshot = [
-  { value: 'Hybrid application', label: 'Electron client with a GraphQL API and AWS-backed services' },
-  { value: 'Workflow automation', label: 'Quoting, files, email, tasks, analytics, and administration' },
-  { value: 'AI-assisted operations', label: 'Process automation, assistant workflows, and natural-language controls' },
-]
-
-const privatePlatformHighlights = [
+const focusAreas = [
   {
-    title: 'Desktop file management',
+    title: 'Operational workflow tools',
     description:
-      'The project file explorer supports multi-select, server-side move and copy operations, signed URL access, active file presence, and Windows drag-and-drop behavior across desktop and cloud storage boundaries.',
+      'I build software around the way teams actually work: quoting, project handoffs, task tracking, files, approvals, and reporting.',
     icon: Folders,
   },
   {
-    title: 'Quoting and document generation',
+    title: 'Reliable internal systems',
     description:
-      'Spreadsheet-style quote editors handle dense line-item data with keyboard navigation, bulk editing, import workflows, approval states, finalization steps, and generated PDF and Excel documents.',
-    icon: FileText,
-  },
-  {
-    title: 'Realtime collaboration',
-    description:
-      'WebSocket-backed editing, version locks, change review flows, project chat, notifications, and cross-window clipboard state coordinate concurrent work across the application.',
-    icon: UsersThree,
-  },
-  {
-    title: 'Typed data and permissions',
-    description:
-      'The data layer uses generated GraphQL clients, resolvers, migrations, authorization rules, search and filter metadata, and backend utilities for consistent business record handling.',
+      'I turn scattered process knowledge into structured data, clear permissions, generated documents, and repeatable workflows.',
     icon: Database,
   },
   {
-    title: 'AI-assisted workflow automation',
+    title: 'Practical automation',
     description:
-      'AI features automate repetitive operational steps, including email processing, attachment-aware workflows, natural-language table controls, guided task creation, and analytics queries with explicit review points.',
+      'I use APIs and AI where they remove real friction: email handling, data review, document workflows, and routine operational steps.',
+    icon: Sparkle,
+  },
+]
+
+const exlLeadershipSnapshot = [
+  { title: 'Role', value: 'Technology leadership and hands-on product engineering', icon: Briefcase },
+  { title: 'Scope', value: 'Internal software for daily project and revenue workflows', icon: Desktop },
+  { title: 'Goal', value: 'Fewer manual handoffs and more dependable execution', icon: ChartLineUp },
+]
+
+const exlPlatformSnapshot = [
+  { value: 'Quoting', label: 'Structured line-item workflows and generated documents' },
+  { value: 'Projects', label: 'Records, files, tasks, communication, and coordination' },
+  { value: 'Automation', label: 'Email, reporting, AI assistance, and admin workflows' },
+]
+
+const exlPlatformHighlights = [
+  {
+    title: 'Project operations',
+    description:
+      'A shared workspace for project records, files, tasks, communication, and the context people need to move work forward.',
+    icon: Folders,
+  },
+  {
+    title: 'Quoting workflows',
+    description:
+      'Dense line-item editing, approvals, imports, and PDF/Excel generation for the parts of the business where accuracy matters.',
+    icon: FileText,
+  },
+  {
+    title: 'Team visibility',
+    description:
+      'Locks, notifications, review flows, and shared state help estimating, project management, and administration stay aligned.',
+    icon: UsersThree,
+  },
+  {
+    title: 'Structured data',
+    description:
+      'GraphQL, generated types, migrations, and authorization rules keep business records consistent across the application.',
+    icon: Database,
+  },
+  {
+    title: 'AI-assisted work',
+    description:
+      'AI supports repetitive review and routing steps where a human should still stay in control of the final decision.',
     icon: Sparkle,
   },
   {
-    title: 'Release and reliability',
+    title: 'Production ownership',
     description:
-      'Production support includes client version gating, automatic update states, Sentry reporting, release packaging, native module rebuilds, and display settings for text size and zoom.',
+      'Version gates, packaging, error reporting, and support workflows keep the platform maintainable after launch.',
     icon: ShieldCheck,
   },
 ]
 
-const privatePlatformArchitecture = [
+const exlPlatformArchitecture = [
   {
-    title: 'Electron application shell',
+    title: 'Desktop application',
     description:
-      'Main, preload, and renderer layers coordinate secure IPC, custom window chrome, local file access, document generation, and native Windows integration points.',
+      'Electron and React provide a focused workspace for high-volume operational tasks and Windows-native behavior.',
     icon: Desktop,
   },
   {
-    title: 'React renderer',
+    title: 'Typed product UI',
     description:
-      'React, Chakra UI, Apollo, generated GraphQL types, saved table state, and keyboard shortcuts support high-density operational workflows.',
+      'TypeScript, Apollo, generated GraphQL types, and saved table state support data-heavy screens without guesswork.',
     icon: TerminalWindow,
   },
   {
     title: 'Backend services',
     description:
-      'Serverless GraphQL, WebSocket handlers, authentication, S3-backed files, database migrations, email workflows, and infrastructure code support the desktop client.',
+      'AWS services support authentication, files, realtime events, email workflows, search, and business data.',
     icon: CloudArrowUp,
   },
 ]
@@ -344,17 +371,18 @@ const Home = () => {
       ) : null}
 
       <section className="mx-auto grid w-full max-w-7xl gap-10 overflow-hidden px-5 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-8 lg:py-16">
-        <div className="hero-copy min-w-0">
+        <div className="hero-copy w-full min-w-0">
           <div className="inline-flex rounded-full border border-emerald-300/25 bg-emerald-300/10 px-3 py-1 text-sm font-medium text-emerald-100">
-            Full-stack software engineer
+            CTO, Expressive Lighting
           </div>
-          <h1 className="mt-6 max-w-4xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-            I build practical apps for complex workflows.
+          <h1 className="mt-6 w-full max-w-xs text-3xl font-semibold leading-tight text-white sm:max-w-4xl sm:text-5xl lg:text-6xl">
+            <span className="block">I build software</span>
+            <span className="block">that makes operations</span>
+            <span className="block">easier to run.</span>
           </h1>
-          <p className="mt-5 max-w-2xl break-words text-lg leading-8 text-zinc-300">
-            I&apos;m William Kieffer, a software engineer in New York. I work across React, TypeScript, Electron,
-            GraphQL, AWS, Flutter, and AI-assisted tools, with a focus on automating manual processes and turning
-            complex business workflows into clear, reliable software.
+          <p className="mt-5 w-full max-w-xs break-words text-base leading-7 text-zinc-300 sm:max-w-2xl sm:text-lg sm:leading-8">
+            I&apos;m William Kieffer, CTO of Expressive Lighting. I lead technology and build internal tools that make
+            quoting, project work, files, reporting, and day-to-day coordination more reliable.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
@@ -364,13 +392,19 @@ const Home = () => {
               View resume
             </Link>
             <a
-              href="#private-platform-case-study"
+              href="#exl-platform-case-study"
               className="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:border-cyan-300/50 hover:text-cyan-100"
             >
-              Read featured case study
+              See featured work
+            </a>
+            <a
+              href="mailto:william.kieffer@outlook.com"
+              className="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:border-emerald-300/50 hover:text-emerald-100"
+            >
+              Contact
             </a>
           </div>
-          <dl className="mt-9 grid gap-3 sm:grid-cols-3">
+          <dl className="mt-9 grid w-full max-w-xs gap-3 sm:max-w-none sm:grid-cols-3">
             {profileSummary.map((point) => (
               <div key={point.value} className="rounded-md border border-white/10 bg-white/[0.035] p-4">
                 <dt className="text-sm text-zinc-500">{point.label}</dt>
@@ -393,8 +427,7 @@ const Home = () => {
           <div className="w-full max-w-80 rounded-md border border-white/10 bg-zinc-950/90 p-4 shadow-2xl backdrop-blur">
             <div className="text-sm uppercase tracking-[0.18em] text-cyan-200">Current focus</div>
             <div className="mt-1 text-sm leading-6 text-zinc-300">
-              A desktop operations platform with quoting, file management, collaboration, reporting, and AI-assisted
-              workflow automation.
+              Leading technical direction while staying close to the software that runs the business.
             </div>
           </div>
         </div>
@@ -404,42 +437,66 @@ const Home = () => {
         <div className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">Selected work</div>
-              <h2 className="mt-2 text-3xl font-semibold text-white">Products with real users in mind</h2>
+              <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">What I do</div>
+              <h2 className="mt-2 text-3xl font-semibold text-white">Custom software for operational work</h2>
             </div>
             <p className="max-w-xl text-sm leading-6 text-zinc-400">
-              A mix of production software, startup work, mobile app development, cloud architecture, and AI-assisted
-              workflow automation.
+              My work sits where business process, product judgment, and engineering meet. The goal is simple:
+              replace fragile manual steps with software people can trust.
             </p>
           </div>
 
-          <div
-            id="private-platform-case-study"
-            className="mt-8 scroll-mt-28 border-y border-cyan-300/20 py-8"
-          >
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {focusAreas.map(({ title, description, icon: Icon }) => (
+              <article
+                key={title}
+                className="rounded-md border border-white/10 bg-zinc-950/45 p-5 transition-colors hover:border-emerald-300/30"
+              >
+                <span className="grid h-11 w-11 place-items-center rounded-md border border-emerald-300/20 bg-emerald-300/10 text-emerald-100">
+                  <Icon size={22} weight="duotone" aria-hidden />
+                </span>
+                <h3 className="mt-4 text-lg font-semibold text-white">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-zinc-400">{description}</p>
+              </article>
+            ))}
+          </div>
+
+          <div id="exl-platform-case-study" className="mt-8 scroll-mt-28 border-y border-cyan-300/20 py-8">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-4xl">
                 <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1 text-sm font-medium text-cyan-100">
                   <Desktop size={15} weight="duotone" aria-hidden />
-                  Production operations platform
+                  Expressive Lighting (EXL)
                 </div>
                 <h3 className="mt-5 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-                  ERP/CRM desktop platform
+                  Expressive Lighting operations platform
                 </h3>
                 <p className="mt-5 text-lg leading-8 text-zinc-300">
-                  A production Electron application for a specialized B2B operations team, developed to consolidate
-                  project tracking, quote generation, file management, task coordination, internal communication,
-                  analytics, and administration in one desktop-first system.
+                  A desktop-first internal system for the core workflows behind Expressive Lighting: quotes, projects,
+                  files, tasks, email, reporting, and administration.
                 </p>
                 <p className="mt-4 leading-7 text-zinc-400">
-                  The platform combines cloud data, local desktop behavior, document workflows, permissions, release
-                  management, and AI-assisted automation for repetitive operational tasks.
+                  I lead the roadmap and build the platform hands-on, keeping the software close to the people using it
+                  while giving the company a more consistent way to run complex work.
                 </p>
+              </div>
+              <div className="grid w-full gap-3 rounded-md border border-white/10 bg-zinc-950/55 p-4 lg:w-80">
+                {exlLeadershipSnapshot.map(({ title, value, icon: Icon }) => (
+                  <div key={title} className="grid grid-cols-[auto_1fr] gap-3">
+                    <span className="grid h-10 w-10 place-items-center rounded-md border border-white/10 bg-white/[0.04] text-cyan-100">
+                      <Icon size={20} weight="duotone" aria-hidden />
+                    </span>
+                    <div>
+                      <div className="text-xs uppercase tracking-[0.18em] text-zinc-500">{title}</div>
+                      <div className="mt-1 text-sm font-medium leading-6 text-zinc-100">{value}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
             <dl className="mt-7 grid gap-3 lg:grid-cols-3">
-              {privatePlatformSnapshot.map((item) => (
+              {exlPlatformSnapshot.map((item) => (
                 <div key={item.value} className="rounded-md border border-white/10 bg-white/[0.035] p-4">
                   <dt className="text-sm text-zinc-500">{item.label}</dt>
                   <dd className="mt-2 text-lg font-semibold text-white">{item.value}</dd>
@@ -449,16 +506,15 @@ const Home = () => {
 
             <div className="mt-8 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
               <div>
-                <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">Project scope</div>
-                <h4 className="mt-2 text-2xl font-semibold text-white">A desktop app with a real backend</h4>
+                <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">How it works</div>
+                <h4 className="mt-2 text-2xl font-semibold text-white">A practical system for real business flow</h4>
                 <p className="mt-4 leading-7 text-zinc-400">
-                  The application combines local operating-system capabilities with cloud services. Electron handles
-                  the desktop shell, TypeScript and React power the renderer, GraphQL connects the data model, and
-                  AWS-backed services handle authentication, files, realtime events, email, and server-side workflows.
+                  The platform combines desktop behavior, cloud data, document generation, permissions, and automation
+                  in one place. It is built for daily use, not demos.
                 </p>
               </div>
               <div className="grid gap-3">
-                {privatePlatformArchitecture.map(({ title, description, icon: Icon }) => (
+                {exlPlatformArchitecture.map(({ title, description, icon: Icon }) => (
                   <article
                     key={title}
                     className="grid gap-3 rounded-md border border-white/10 bg-zinc-950/45 p-4 sm:grid-cols-[auto_1fr]"
@@ -477,9 +533,9 @@ const Home = () => {
 
             <div className="mt-8">
               <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">Key responsibilities</div>
-              <h4 className="mt-2 text-2xl font-semibold text-white">Representative engineering work</h4>
+              <h4 className="mt-2 text-2xl font-semibold text-white">Representative work</h4>
               <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {privatePlatformHighlights.map(({ title, description, icon: Icon }) => (
+                {exlPlatformHighlights.map(({ title, description, icon: Icon }) => (
                   <article
                     key={title}
                     className="rounded-md border border-white/10 bg-white/[0.035] p-4 transition-colors hover:border-cyan-300/35"
@@ -497,20 +553,25 @@ const Home = () => {
             </div>
           </div>
 
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">Selected product work</div>
+              <h3 className="mt-2 text-2xl font-semibold text-white">Independent apps and experiments</h3>
+            </div>
+            <p className="max-w-xl text-sm leading-6 text-zinc-400">
+              Smaller products where I can explore product design, mobile delivery, and consumer workflows.
+            </p>
+          </div>
+
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
-            <a
-              href={VERDE_SITE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group rounded-md border border-emerald-300/20 bg-emerald-300/[0.06] p-5 transition-colors hover:border-emerald-200/50"
-            >
+            <article className="group rounded-md border border-emerald-300/20 bg-emerald-300/[0.06] p-5 transition-colors hover:border-emerald-200/50">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-4">
                   <span className="grid h-16 w-16 shrink-0 place-items-center rounded-md bg-white p-2">
                     <img src={verdeLogo} alt="Verde Financial logo" className="max-h-12 object-contain" />
                   </span>
                   <div>
-                    <div className="text-sm uppercase tracking-[0.18em] text-emerald-100">Startup build</div>
+                    <div className="text-sm uppercase tracking-[0.18em] text-emerald-100">Personal finance</div>
                     <div className="mt-1 text-2xl font-semibold text-white">Verde Financial</div>
                   </div>
                 </div>
@@ -521,10 +582,29 @@ const Home = () => {
                 />
               </div>
               <p className="mt-5 leading-7 text-zinc-300">
-                A personal finance startup designed to simplify budgeting and debt management through focused product
-                design and practical automation.
+                A finance product focused on budgeting, account visibility, recurring charges, and debt planning.
               </p>
-            </a>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <a
+                  href={VERDE_SITE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-100 underline underline-offset-4"
+                >
+                  View promo page
+                  <ArrowSquareOut size={15} aria-hidden />
+                </a>
+                <a
+                  href={VERDE_WEB_APP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-100 underline underline-offset-4"
+                >
+                  Open web app
+                  <ArrowSquareOut size={15} aria-hidden />
+                </a>
+              </div>
+            </article>
             <div className="rounded-md border border-amber-200/20 bg-amber-100/[0.06] p-5">
               <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-4">
@@ -558,7 +638,7 @@ const Home = () => {
                   />
                 </a>
               </div>
-              <p className="mt-5 leading-7 text-zinc-300">Build a plan to reach your health goals.</p>
+              <p className="mt-5 leading-7 text-zinc-300">A mobile app for planning around personal health goals.</p>
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <span className="text-sm text-zinc-500">Coming soon to Android</span>
                 <a
@@ -579,15 +659,14 @@ const Home = () => {
       <section className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <div>
-            <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">Stack</div>
-            <h2 className="mt-2 text-3xl font-semibold text-white">Tools I reach for</h2>
+            <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">Toolkit</div>
+            <h2 className="mt-2 text-3xl font-semibold text-white">Tools I use to ship reliable systems</h2>
             <p className="mt-4 leading-7 text-zinc-400">
-              Comfortable across product surfaces and backend services, especially where desktop UX, data, APIs,
-              documents, and mobile experiences meet.
+              I choose boring, dependable technology where possible and focus the complexity on the business problem.
             </p>
           </div>
           <div className="flex flex-wrap gap-2.5">
-            {technologies.map((tech) => (
+            {capabilitiesAndStack.map((tech) => (
               <span
                 key={tech}
                 className="rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-sm text-zinc-200"
@@ -603,7 +682,7 @@ const Home = () => {
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <div className="text-sm uppercase tracking-[0.2em] text-cyan-200">GitHub</div>
-            <h2 className="mt-2 text-3xl font-semibold text-white">Recent public projects</h2>
+            <h2 className="mt-2 text-3xl font-semibold text-white">Public projects</h2>
           </div>
           <div className="text-sm text-zinc-500">
             {projectsLoading
