@@ -43,7 +43,7 @@ type Project = {
 const GITHUB_REPOS_URL = 'https://api.github.com/users/willkieffer/repos?per_page=100&sort=updated'
 const PULSE_APP_STORE_URL = 'https://apps.apple.com/us/app/pulse-health-assistant/id6670768611'
 const PULSE_SITE_URL = 'https://pulse.williamkieffer.works/'
-const VERDE_SITE_URL = 'https://www.verdefinancialapp.com'
+const VERDE_SITE_URL = 'https://verde.williamkieffer.works'
 const VERDE_WEB_APP_URL = 'https://app.verde.williamkieffer.works'
 
 const capabilitiesAndStack = [
@@ -441,8 +441,8 @@ const Home = () => {
               <h2 className="mt-2 text-3xl font-semibold text-white">Custom software for operational work</h2>
             </div>
             <p className="max-w-xl text-sm leading-6 text-zinc-400">
-              My work sits where business process, product judgment, and engineering meet. The goal is simple:
-              replace fragile manual steps with software people can trust.
+              My work sits where business process, product judgment, and engineering meet. The goal is simple: replace
+              fragile manual steps with software people can trust.
             </p>
           </div>
 

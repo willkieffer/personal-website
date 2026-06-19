@@ -5,12 +5,6 @@ import googleMaps from './assets/google-maps-logo-4-1.png'
 const Personal = () => {
   return (
     <section className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-10 lg:px-8">
-      <div>
-        <div className="max-w-3xl text-zinc-300">
-          I use this page as a kind of mood board&mdash;it's got some of what I'm up to and what's on my to-do list.
-        </div>
-        <div className="mt-6 border-t border-white/10" />
-      </div>
       <div className="flex flex-wrap items-center justify-center gap-8">
         <a href="https://www.thetrevorproject.org/" target="_blank" rel="noopener noreferrer" className="no-underline">
           <div className="flex max-w-96 flex-col items-center justify-center rounded-md border border-orange-300/40 bg-white/[0.035] p-4">
