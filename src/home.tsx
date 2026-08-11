@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import linkedinphoto from './assets/linkedinphoto.png'
+import pokeMark from './assets/poke-mark.svg'
 import pulseLogo from './assets/pulseLogo.png'
 import verdeLogo from './assets/verdeLogo.png'
 import appleAppStore from './assets/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg'
@@ -41,6 +42,7 @@ type Project = {
 }
 
 const GITHUB_REPOS_URL = 'https://api.github.com/users/willkieffer/repos?per_page=100&sort=updated'
+const POKE_APP_URL = 'https://app.poke.williamkieffer.works'
 const PULSE_APP_STORE_URL = 'https://apps.apple.com/us/app/pulse-health-assistant/id6670768611'
 const PULSE_SITE_URL = 'https://pulse.williamkieffer.works/'
 const VERDE_SITE_URL = 'https://verde.williamkieffer.works'
@@ -563,7 +565,38 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="mt-8 grid gap-4 lg:grid-cols-2">
+          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <article className="group rounded-md border border-blue-300/20 bg-blue-400/[0.06] p-5 transition-colors hover:border-blue-200/50">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <span className="grid h-16 w-16 shrink-0 place-items-center rounded-md bg-white p-2">
+                    <img src={pokeMark} alt="Poke logo" className="max-h-12 object-contain" />
+                  </span>
+                  <div>
+                    <div className="text-sm uppercase tracking-[0.18em] text-blue-100">Health &amp; N-of-1</div>
+                    <div className="mt-1 text-2xl font-semibold text-white">Poke</div>
+                  </div>
+                </div>
+                <ArrowSquareOut
+                  size={22}
+                  className="shrink-0 text-blue-100 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  aria-hidden
+                />
+              </div>
+              <p className="mt-5 leading-7 text-zinc-300">
+                A private-first tracker for health, fitness, nutrition, supplements, and personal experiments—bringing
+                plans, history, observations, and uncertainty into one clear timeline.
+              </p>
+              <a
+                href={POKE_APP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-blue-100 underline underline-offset-4"
+              >
+                Open app
+                <ArrowSquareOut size={15} aria-hidden />
+              </a>
+            </article>
             <article className="group rounded-md border border-emerald-300/20 bg-emerald-300/[0.06] p-5 transition-colors hover:border-emerald-200/50">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-4">

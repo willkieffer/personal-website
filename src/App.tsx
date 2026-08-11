@@ -144,7 +144,7 @@ const Root = () => {
         <Outlet />
       </main>
       <footer className="mx-auto max-w-7xl px-5 py-10 text-sm text-zinc-500 lg:px-8">
-        <div className="border-t border-white/10 pt-6">Last updated June 2026</div>
+        <div className="border-t border-white/10 pt-6">Last updated August 2026</div>
       </footer>
     </div>
   )
